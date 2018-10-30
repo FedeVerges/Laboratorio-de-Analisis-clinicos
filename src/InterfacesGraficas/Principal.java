@@ -17,20 +17,25 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.scene.control.CheckBox;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
+import javax.swing.border.Border;
 import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import org.omg.CORBA.MARSHAL;
 
 /**
  *
@@ -57,9 +62,8 @@ public class Principal extends javax.swing.JFrame {
         //CONTROLAR ESTO!!!!!
 
         initComponents();
-        
-        //Tablas pestaña cargar resultados:
 
+        //Tablas pestaña cargar resultados:
         modeloTablaOrdenesPendientes = (DefaultTableModel) jTable2_TablaOrdenesPendientes.getModel();
         jTable2_TablaOrdenesPendientes.setModel(modeloTablaOrdenesPendientes);
 
@@ -72,11 +76,10 @@ public class Principal extends javax.swing.JFrame {
         jTable4_cargarValoresAnalisis.setModel(modeloTablaAnalisisResultados);
 
         //Pestaña cargar ordenes 
-        
         // Tabla analisis seleccionados
         modeloTablaAnalisisSelecionados = (DefaultTableModel) jTable_AnalisisSeleccionados.getModel();
         jTable_AnalisisSeleccionados.setModel(modeloTablaAnalisisSelecionados);
-        
+
         // tabla analisis para seleccionar.
         modeloTablaAnalisisParaSeleccionar = (DefaultTableModel) jTableAnalasisParaSeleccionar.getModel();
         jTableAnalasisParaSeleccionar.setModel(modeloTablaAnalisisParaSeleccionar);
@@ -90,7 +93,6 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Metodo para cargar la tabla de los analisis que pueden ser seleccionados.
-    
     public void cargarTablaAnalisisParaSeleccionar() {
         ManagerAnalisis ma = new ManagerAnalisis();
         ArrayList<Analisis> datos = ma.recuperarFilas();
@@ -129,10 +131,7 @@ public class Principal extends javax.swing.JFrame {
         // ArrayList<Analisis> datos = ma.recuperarAnalisisSeleccionados(codigo, nombre, indicacionesPrevias, cantidadUnidadesB, consentimiento, costoDescartables, valoresReferencia);
     }
      */
-    
-    
     // Metodo para listar los analisis por numero de orden.
-        
     public void listarAnalisisPorOrden(int codigoOrden) {
         Manager_Ordenes ma = new Manager_Ordenes();
         ArrayList<Resultado> datos = ma.recuperarFilasResultados(codigoOrden);
@@ -786,7 +785,7 @@ public class Principal extends javax.swing.JFrame {
         jFrame_ListadoAnalisis.setSize(800, 450);
     }//GEN-LAST:event_jButton_Analisis_CargarOrden1ActionPerformed
 
-     // metodo para cargar la tabla de analisis que deben ser seleccionados.
+    // metodo para cargar la tabla de analisis que deben ser seleccionados.
     public void cargarTablaAnalisis() {
         ManagerAnalisis ma = new ManagerAnalisis();
         ArrayList<Analisis> datos = ma.recuperarFilas();
@@ -802,7 +801,7 @@ public class Principal extends javax.swing.JFrame {
             fila++;
         }
     }
-    
+
     private void jTable2_TablaOrdenesPendientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2_TablaOrdenesPendientesMouseClicked
         Integer codigoOrden = Integer.parseInt(String.valueOf(modeloTablaOrdenesPendientes.getValueAt(jTable2_TablaOrdenesPendientes.getSelectedRow(), 0)));
         System.out.println("Recibi el codigo de la orden numero: " + codigoOrden);
@@ -827,7 +826,7 @@ public class Principal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jTable_AnalisisMouseClicked
-   
+
     private void jButton2CargarResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2CargarResultadoActionPerformed
         Manager_Ordenes mo = new Manager_Ordenes();
         try {
@@ -843,7 +842,7 @@ public class Principal extends javax.swing.JFrame {
         datos = ma.recuperarAnalisisSeleccionados(modeloTablaAnalisisParaSeleccionar, jTableAnalasisParaSeleccionar);
         cargarTablaAnalsisSeleccionados(datos);
     }//GEN-LAST:event_jButton1CargarListaActionPerformed
- public void cargarTablaAnalsisSeleccionados(ArrayList<Analisis> lista) {
+    public void cargarTablaAnalsisSeleccionados(ArrayList<Analisis> lista) {
         int i;
         for (i = 0; i < jTable_AnalisisSeleccionados.getRowCount(); i++) {
             modeloTablaAnalisisSelecionados.removeRow(i);
@@ -860,7 +859,7 @@ public class Principal extends javax.swing.JFrame {
         }
 
     }
- 
+
     private void jButton_CargarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CargarOrdenActionPerformed
         ManagerPaciente mp = new ManagerPaciente();
         Manager_Ordenes mo = new Manager_Ordenes();
@@ -873,10 +872,10 @@ public class Principal extends javax.swing.JFrame {
         // Datos Paciente
         String nombre;
         String apellido;
-        int dni;
-        Long telefono;
+        int dni = 0;
+        Long telefono = null;
         String fNacimiento; // se pasa la fecha a formato String
-        int edad;
+        int edad = 0;
         String sexo;
         Date fecha = jDateChooser_fechaNacimiento.getDate();
 
@@ -884,9 +883,13 @@ public class Principal extends javax.swing.JFrame {
         // realizar control de dni repetidos en tu bd y no cargar valores que ya existan.
         nombre = jTextField_Nombre.getText();
         apellido = jTextField_Apellido.getText();
+        try{
         dni = Integer.parseInt(jTextField_dni.getText());
         telefono = Long.parseLong(jTextField_telefono.getText());
         edad = Integer.parseInt(jTextField_Edad.getText());
+         }catch (NumberFormatException e){
+            jTextField_dni.setBackground(Color.red);
+        }
         if (jRadioButton_femenino.isSelected()) {
             sexo = "Femenino";
         } else {
@@ -894,43 +897,132 @@ public class Principal extends javax.swing.JFrame {
         }
         fNacimiento = dameFecha(fecha);
 
-        // recuparar analsiis de la lista.
-        try {
-            mp.cargarPaciente(nombre, apellido, dni, telefono, fNacimiento, edad, sexo);
-            String obraSocial = (String) jComboBox_ObraSocial.getSelectedItem();
-            if (obraSocial.equals("")) {
-            } else {
-                mp.cargarObraSocialPaciente(obraSocial, dni);
-            }
-            codigo = mo.cargarOrden(fechaIngreso, nombreMedico, dni, nombre, obraSocial);
+        if (ValidarCampos(fechaIngreso,nombreMedico, nombre, apellido, dni, telefono, edad,fNacimiento)) {
 
-            // carga de los resultados pendientes.
-            ArrayList<Analisis> listaCodigos = ma.recuperarCodigos(modeloTablaAnalisisSelecionados, jTable_AnalisisSeleccionados);
-            for (Analisis a : listaCodigos) {
-                Resultado r = new Resultado(codigo, a.getCodigo(), a.getNombre());
-                mo.cargarResultado(r);
+            // recuparar analsiis de la lista.
+            try {
+                mp.cargarPaciente(nombre, apellido, dni, telefono, fNacimiento, edad, sexo);
+                String obraSocial = (String) jComboBox_ObraSocial.getSelectedItem();
+                if (obraSocial.equals("")) {
+                } else {
+                    mp.cargarObraSocialPaciente(obraSocial, dni);
+                }
+                codigo = mo.cargarOrden(fechaIngreso, nombreMedico, dni, nombre, obraSocial);
 
-            }
+                // carga de los resultados pendientes.
+                ArrayList<Analisis> listaCodigos = ma.recuperarCodigos(modeloTablaAnalisisSelecionados, jTable_AnalisisSeleccionados);
+                for (Analisis a : listaCodigos) {
+                    Resultado r = new Resultado(codigo, a.getCodigo(), a.getNombre());
+                    mo.cargarResultado(r);
 
-            /*
+                }
+
+                /*
             if(listaCodigos.isEmpty()){
             JOptionPane.showMessageDialog(null, "No ha cargado ningun analisis en la lista.");
         }
-             */
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "error al cargar en la base de datos");
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "telefono invalido");
+                 */
+            } catch (SQLException ex) {
+                Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(null, "error al cargar en la base de datos");
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "telefono invalido");
+            }
+            JOptionPane.showMessageDialog(null, "alta con Exito");
         }
 
-        JOptionPane.showMessageDialog(null, "alta con Exito");
-
-
     }//GEN-LAST:event_jButton_CargarOrdenActionPerformed
-    public Boolean ValidarCampos(){
-        return false;
+    public Boolean ValidarCampos(String fechaIngreso,String medico, String nombre, String apellido, int dni, Long telefono, int edad, String fechaNacimiento) {
+
+        Boolean control = true;
+        ManagerPaciente mp = new ManagerPaciente();
+        
+        // Control fecha ingreso vacia
+        
+        if(control){
+            if(fechaIngreso == null){
+                jDateChooserfechaIngreso.setForeground(Color.red);
+                control = false;
+            }
+        }
+
+        // Control nombre del medico 
+        if (control) {
+            jTextField_Medico_CargarOrden.setBackground(Color.white);
+            String regex = "^[a-zA-Z][a-zA-Z\\s]*$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(medico);
+            if (!matcher.matches()) {
+                jTextField_Medico_CargarOrden.setBackground(Color.red);
+                control = false;
+            }
+        }
+
+        // Control nombre
+        if (control) {
+            jTextField_Nombre.setBackground(Color.white);
+            String regex = "^[a-zA-Z][a-zA-Z\\s]*$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(nombre);
+            if (!matcher.matches()) {
+                jTextField_Nombre.setBackground(Color.red);
+                control = false;
+            }
+        }
+
+        // Control apellido
+        if (control) {
+            jTextField_Apellido.setBackground(Color.white);
+            String regex = "^[a-zA-Z][a-zA-Z\\s]*$";
+            Pattern pattern = Pattern.compile(regex);
+            Matcher matcher = pattern.matcher(apellido);
+            if (!matcher.matches()) {
+                jTextField_Apellido.setBackground(Color.red);
+                control = false;
+            }
+        }
+
+        // Control Dni por tamaño 
+        if (control) {
+            jTextField_dni.setBackground(Color.white);
+            if (dni > 99999999 || dni < 1000000) {
+                jTextField_dni.setBackground(Color.red);
+                control = false;
+            }
+        }
+        // Control edad por tamaño
+        if (control) {
+            jTextField_Edad.setBackground(Color.white);
+            if (edad > 120 || edad < 1) {
+                jTextField_Edad.setBackground(Color.red);
+            }
+        }
+        // Control Edad
+        if (control) {
+            jTextField_Edad.setBackground(Color.white);
+            jDateChooser_fechaNacimiento.setForeground(Color.white);
+
+            int año = Calendar.getInstance().get(Calendar.YEAR);
+            int añoNacimiento = jDateChooser_fechaNacimiento.getCalendar().get(Calendar.YEAR);
+            if (edad != año - añoNacimiento) {
+                jTextField_Edad.setBackground(Color.red);
+                jDateChooser_fechaNacimiento.setForeground(Color.red);
+                control = false;
+            }
+        }
+        
+        // Control fecha nacimiento vacio
+        
+        if(control){
+            if(fechaNacimiento == null){
+                jDateChooser_fechaNacimiento.setForeground( Color.red);
+                control = false;
+            }
+        }
+        return control;
+
     }
+
 
     private void jButton_ListadoPaciente_CargarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListadoPaciente_CargarOrdenActionPerformed
 
@@ -942,7 +1034,13 @@ public class Principal extends javax.swing.JFrame {
     public String dameFecha(Date date) {
         String formato = jDateChooser_fechaNacimiento.getDateFormatString();
         SimpleDateFormat sdf = new SimpleDateFormat(formato);
-        String fecha = String.valueOf(sdf.format(date));
+        String fecha = null;
+        try {
+            fecha = String.valueOf(sdf.format(date));
+        } catch (NullPointerException e) {
+            jDateChooser_fechaNacimiento.setForeground(Color.red);
+
+        }
         return fecha;
     }
 
