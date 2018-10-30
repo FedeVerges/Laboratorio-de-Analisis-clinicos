@@ -57,6 +57,7 @@ public class Principal extends javax.swing.JFrame {
         //CONTROLAR ESTO!!!!!
 
         initComponents();
+        
         //Tablas pestaña cargar resultados:
 
         modeloTablaOrdenesPendientes = (DefaultTableModel) jTable2_TablaOrdenesPendientes.getModel();
@@ -66,17 +67,20 @@ public class Principal extends javax.swing.JFrame {
         modeloTablaPaciente = (DefaultTableModel) jTable_pacientes.getModel();
         jTable_pacientes.setModel(modeloTablaPaciente);
 
-        // Tabla Analisis
+        // Tabla analisis de los resultados
         modeloTablaAnalisisResultados = (DefaultTableModel) jTable4_cargarValoresAnalisis.getModel();
         jTable4_cargarValoresAnalisis.setModel(modeloTablaAnalisisResultados);
 
         //Pestaña cargar ordenes 
+        
+        // Tabla analisis seleccionados
         modeloTablaAnalisisSelecionados = (DefaultTableModel) jTable_AnalisisSeleccionados.getModel();
         jTable_AnalisisSeleccionados.setModel(modeloTablaAnalisisSelecionados);
-
+        
+        // tabla analisis para seleccionar.
         modeloTablaAnalisisParaSeleccionar = (DefaultTableModel) jTableAnalasisParaSeleccionar.getModel();
         jTableAnalasisParaSeleccionar.setModel(modeloTablaAnalisisParaSeleccionar);
-
+        // tabla de analisis.
         jTable_Analisis.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         jTable2_TablaOrdenesPendientes.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
 
@@ -85,23 +89,8 @@ public class Principal extends javax.swing.JFrame {
         cargarTablaOrdenesPendientes();
     }
 
-    // metodo para cargar la tabla de analisis que deben ser seleccionados.
-    public void cargarTablaAnalisis() {
-        ManagerAnalisis ma = new ManagerAnalisis();
-        ArrayList<Analisis> datos = ma.recuperarFilas();
-        int fila = 0;
-        for (Analisis i : datos) {
-            modeloTablaAnalisis.addRow(new Object[6]);
-            jTable_Analisis.setValueAt(i.getCodigo(), fila, 0);
-            jTable_Analisis.setValueAt(i.getNombre(), fila, 1);
-            jTable_Analisis.setValueAt(i.getIndicacionesPrevias(), fila, 2);
-            jTable_Analisis.setValueAt(i.getCantidadUnidadesB(), fila, 3);
-            jTable_Analisis.setValueAt(i.getConsentimiento(), fila, 4);
-            jTable_Analisis.setValueAt(i.getCostoDescartables(), fila, 5);
-            fila++;
-        }
-    }
-
+    // Metodo para cargar la tabla de los analisis que pueden ser seleccionados.
+    
     public void cargarTablaAnalisisParaSeleccionar() {
         ManagerAnalisis ma = new ManagerAnalisis();
         ArrayList<Analisis> datos = ma.recuperarFilas();
@@ -140,12 +129,10 @@ public class Principal extends javax.swing.JFrame {
         // ArrayList<Analisis> datos = ma.recuperarAnalisisSeleccionados(codigo, nombre, indicacionesPrevias, cantidadUnidadesB, consentimiento, costoDescartables, valoresReferencia);
     }
      */
-
- /*
     
-    Metodo para listar los analisis por numero de orden.
     
-     */
+    // Metodo para listar los analisis por numero de orden.
+        
     public void listarAnalisisPorOrden(int codigoOrden) {
         Manager_Ordenes ma = new Manager_Ordenes();
         ArrayList<Resultado> datos = ma.recuperarFilasResultados(codigoOrden);
@@ -799,6 +786,23 @@ public class Principal extends javax.swing.JFrame {
         jFrame_ListadoAnalisis.setSize(800, 450);
     }//GEN-LAST:event_jButton_Analisis_CargarOrden1ActionPerformed
 
+     // metodo para cargar la tabla de analisis que deben ser seleccionados.
+    public void cargarTablaAnalisis() {
+        ManagerAnalisis ma = new ManagerAnalisis();
+        ArrayList<Analisis> datos = ma.recuperarFilas();
+        int fila = 0;
+        for (Analisis i : datos) {
+            modeloTablaAnalisis.addRow(new Object[6]);
+            jTable_Analisis.setValueAt(i.getCodigo(), fila, 0);
+            jTable_Analisis.setValueAt(i.getNombre(), fila, 1);
+            jTable_Analisis.setValueAt(i.getIndicacionesPrevias(), fila, 2);
+            jTable_Analisis.setValueAt(i.getCantidadUnidadesB(), fila, 3);
+            jTable_Analisis.setValueAt(i.getConsentimiento(), fila, 4);
+            jTable_Analisis.setValueAt(i.getCostoDescartables(), fila, 5);
+            fila++;
+        }
+    }
+    
     private void jTable2_TablaOrdenesPendientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2_TablaOrdenesPendientesMouseClicked
         Integer codigoOrden = Integer.parseInt(String.valueOf(modeloTablaOrdenesPendientes.getValueAt(jTable2_TablaOrdenesPendientes.getSelectedRow(), 0)));
         System.out.println("Recibi el codigo de la orden numero: " + codigoOrden);
@@ -823,7 +827,23 @@ public class Principal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jTable_AnalisisMouseClicked
-    public void cargarTablaAnalsisSeleccionados(ArrayList<Analisis> lista) {
+   
+    private void jButton2CargarResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2CargarResultadoActionPerformed
+        Manager_Ordenes mo = new Manager_Ordenes();
+        try {
+            mo.recuperarResultadosDeTabla(modeloTablaAnalisisResultados, jTable4_cargarValoresAnalisis);
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_jButton2CargarResultadoActionPerformed
+
+    private void jButton1CargarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1CargarListaActionPerformed
+        ArrayList<Analisis> datos = new ArrayList();
+        datos = ma.recuperarAnalisisSeleccionados(modeloTablaAnalisisParaSeleccionar, jTableAnalasisParaSeleccionar);
+        cargarTablaAnalsisSeleccionados(datos);
+    }//GEN-LAST:event_jButton1CargarListaActionPerformed
+ public void cargarTablaAnalsisSeleccionados(ArrayList<Analisis> lista) {
         int i;
         for (i = 0; i < jTable_AnalisisSeleccionados.getRowCount(); i++) {
             modeloTablaAnalisisSelecionados.removeRow(i);
@@ -840,22 +860,7 @@ public class Principal extends javax.swing.JFrame {
         }
 
     }
-    private void jButton2CargarResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2CargarResultadoActionPerformed
-        Manager_Ordenes mo = new Manager_Ordenes();
-        try {
-            mo.recuperarResultadosDeTabla(modeloTablaAnalisisResultados, jTable4_cargarValoresAnalisis);
-        } catch (SQLException ex) {
-            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-    }//GEN-LAST:event_jButton2CargarResultadoActionPerformed
-
-    private void jButton1CargarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1CargarListaActionPerformed
-        ArrayList<Analisis> datos = new ArrayList();
-        datos = ma.recuperarAnalisisSeleccionados(modeloTablaAnalisisParaSeleccionar, jTableAnalasisParaSeleccionar);
-        cargarTablaAnalsisSeleccionados(datos);
-    }//GEN-LAST:event_jButton1CargarListaActionPerformed
-
+ 
     private void jButton_CargarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CargarOrdenActionPerformed
         ManagerPaciente mp = new ManagerPaciente();
         Manager_Ordenes mo = new Manager_Ordenes();
@@ -923,7 +928,9 @@ public class Principal extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_jButton_CargarOrdenActionPerformed
-
+    public Boolean ValidarCampos(){
+        return false;
+    }
 
     private void jButton_ListadoPaciente_CargarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListadoPaciente_CargarOrdenActionPerformed
 
