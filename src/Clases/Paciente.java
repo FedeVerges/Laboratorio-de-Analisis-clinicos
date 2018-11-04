@@ -31,7 +31,7 @@ public class Paciente {
     }
 
     public int getDni() {
-        return dni;
+        return  dni;
     }
 
     public Orden getOrden() {

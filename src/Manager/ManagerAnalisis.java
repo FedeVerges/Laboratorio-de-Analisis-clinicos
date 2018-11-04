@@ -17,7 +17,8 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
+import java.util.Calendar;
+import java.util.Date;
 /**
  *
  * @author fede_
@@ -125,12 +126,17 @@ public class ManagerAnalisis {
     }
 
     public ArrayList<Analisis> recuperarCodigos(DefaultTableModel modelo, JTable tabla) {
+        
         ArrayList<Analisis> listaCodigos = new ArrayList<>();
-        int fila = 0;
-        int i;
+        int fila = tabla.getRowCount();
+        int  i;
         try {
             for (i = 0; i < fila; i++) {
-                Analisis a = new Analisis((modelo.getValueAt(fila, 0)), (modelo.getValueAt(fila, 1)));
+                int pruebaCasteoCodigo=(Integer)(modelo.getValueAt(i, 0));
+                String pruebaCasteoNombre=(modelo.getValueAt(i, 1)).toString();
+                System.out.println("El codigo casteado en recuperar codigo es: "+pruebaCasteoCodigo);
+                System.out.println("El nombre de analisis en recuperar codigo es: "+pruebaCasteoNombre);
+                Analisis a = new Analisis((Integer)(modelo.getValueAt(i, 0)), (modelo.getValueAt(i, 1)).toString());
                 listaCodigos.add(a);
 
             }
@@ -138,6 +144,10 @@ public class ManagerAnalisis {
         }
         return listaCodigos;
     }
-
+    /*
+    public String recuperarValorReferencia(int codigoAnalisis){
+        // consultarle a fede por la query
+    }
+    */
     //  public  recuperarAnalisisSeleccionados(int codigo, String nombre, String indicacionesPrevias, int cantidadUnidadesB, String consentimiento, int costoDescartables, String valoresReferencia) {
 }
