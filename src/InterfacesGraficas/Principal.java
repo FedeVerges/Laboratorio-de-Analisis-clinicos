@@ -1567,7 +1567,7 @@ public class Principal extends javax.swing.JFrame {
 
         }
         
-        return fecha;
+        return  fecha;
     }
 
     /**
