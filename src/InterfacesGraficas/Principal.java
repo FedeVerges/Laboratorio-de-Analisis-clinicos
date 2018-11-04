@@ -1566,6 +1566,7 @@ public class Principal extends javax.swing.JFrame {
             jDateChooser_fechaNacimiento.setForeground(Color.red);
 
         }
+        
         return fecha;
     }
 
