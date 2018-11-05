@@ -137,36 +137,6 @@ public class ManagerPaciente {
         return columnas;
 
     }
-      public Paciente recupararPaciente(DefaultTableModel modelo, JTable tabla){
-        String nombre = (modelo.getValueAt(tabla.getSelectedRow(), 0).toString());
-        String Apellido = (modelo.getValueAt(tabla.getSelectedRow(), 1).toString());
-        int dni = ((Integer)(modelo.getValueAt(tabla.getSelectedRow(), 2)));
-        Long telefono = (Long) (modelo.getValueAt(tabla.getSelectedRow(), 3));
-        String fechaN = (modelo.getValueAt(tabla.getSelectedRow(), 4).toString());
-        int edad =(Integer) (modelo.getValueAt(tabla.getSelectedRow(), 5));
-        String sexo = (modelo.getValueAt(tabla.getSelectedRow(), 6).toString());
-        Paciente p = new Paciente(nombre, Apellido, dni, telefono, fechaN, edad, sexo);
-        return p;
-    }
-       public String recuperarObraSocial(int dni) {
-        Statement statement = null;
-        String query = "SELECT NOM_OBRA from 'RELACION PACIENTE_OBRA' WHERE NUM_DNI =" + dni;
-        String obraSocial;
-        try {
-            statement = ConnectionMethods.getConection().createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            obraSocial = resultSet.getString("NOM_OBRA");
-            statement.close();
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "error al obtener la obra social del paciente");
-            return null;
-        } finally {
-            ConnectionMethods.close(statement);
-        }
-        return  obraSocial;
-
-    }
 
     public Paciente recupararPaciente(DefaultTableModel modelo, JTable tabla) {
         String nombre = (modelo.getValueAt(tabla.getSelectedRow(), 0).toString());

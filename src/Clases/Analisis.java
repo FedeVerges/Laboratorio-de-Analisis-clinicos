@@ -46,19 +46,6 @@ public class Analisis{
         this.valoresReferencia = valoresReferencia;
     }
     
-    // solo usado de forma auxiliar.
-    public Analisis(int codigo, String nombre) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.cantidadUnidadesB= 0;
-        this.consentimiento="";
-        this.indicacionesPrevias="";
-        this.costoDescartables=0;
-        this.valoresReferencia="";
-    }
-    
-
-
 
     public int getCodigo() {
         return codigo;

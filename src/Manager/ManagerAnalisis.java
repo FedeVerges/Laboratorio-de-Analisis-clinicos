@@ -129,20 +129,12 @@ public class ManagerAnalisis {
     }
 
     public ArrayList<Analisis> recuperarCodigos(DefaultTableModel modelo, JTable tabla) {
-<<<<<<< Upstream, based on origin/master
         
         ArrayList<Analisis> listaCodigos = new ArrayList<>();
         int fila = tabla.getRowCount();
         int  i;
-=======
-        ArrayList<Analisis> listaCodigo = new ArrayList();
-        // Map<Integer,String> 
-        int fila = tabla.getRowCount();
-        int i;
->>>>>>> be71cd8 
         try {
             for (i = 0; i < fila; i++) {
-<<<<<<< Upstream, based on origin/master
                 int pruebaCasteoCodigo=(Integer)(modelo.getValueAt(i, 0));
                 String pruebaCasteoNombre=(modelo.getValueAt(i, 1)).toString();
                 System.out.println("El codigo casteado en recuperar codigo es: "+pruebaCasteoCodigo);
@@ -150,19 +142,11 @@ public class ManagerAnalisis {
                 Analisis a = new Analisis((Integer)(modelo.getValueAt(i, 0)), (modelo.getValueAt(i, 1)).toString());
                 listaCodigos.add(a);
 
-                System.out.println("asdadasdasdasdasdasd!!!!Asdasdasd");
-                System.out.println((modelo.getValueAt(i, 1)).toString());
-                Analisis a = new Analisis((Integer)(modelo.getValueAt(i, 0)),(modelo.getValueAt(i, 1)).toString());
-                
-                System.out.println(a.getCodigo());
-                System.out.println(a.getNombre());
-                
-                listaCodigo.add(a);
 
             }
         } catch (Exception e) {
         }
-        return listaCodigo;
+        return listaCodigos;
     }
     /*
     public String recuperarValorReferencia(int codigoAnalisis){
