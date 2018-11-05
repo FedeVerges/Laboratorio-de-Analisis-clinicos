@@ -31,6 +31,8 @@ public class Orden {
         this.obraSocial = obraSocial;
         this.estado = "PENDIENTE";
     }
+    
+    
 
     
     public int getNumero() {

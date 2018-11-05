@@ -30,44 +30,6 @@ import java.util.Date;
  */
 public class Manager_Ordenes {
 
-    public ArrayList<Orden> recuperarFilasTerminadas() {
-        Statement statement = null;
-
-        String query = "Select * FROM ORDEN,PACIENTE,'OBRA SOCIAL' WHERE ORDEN.ESTADO ='TERMINADO' AND ORDEN.P_DNI = PACIENTE.P_DNI AND ORDEN.OBRA_SOCIAL = 'OBRA SOCIAL'.O_NOMBRE ";
-
-        ArrayList<Orden> datosOrdenes = new ArrayList<Orden>();
-        Orden a;
-
-        try {
-            statement = ConnectionMethods.getConection().createStatement();
-
-            try (ResultSet resultSet = statement.executeQuery(query)) {
-                while (resultSet.next()) {
-                    Paciente p = new Paciente((resultSet.getString("P_NOMBRE")), (resultSet.getString("P_APELLIDO")), (resultSet.getInt("P_DNI")), (resultSet.getLong("P_TELEFONO")), (resultSet.getString("P_FECHA_NACIMIENTO")), (resultSet.getInt("P_EDAD")), (resultSet.getString("P_SEXO")));
-                    Obra_Social obra = new Obra_Social((resultSet.getString("O_NOMBRE")), resultSet.getLong("O_TELEFONO"), resultSet.getFloat("O_PUB"));
-
-                    a = new Orden((resultSet.getString("OR_FECHA")), (resultSet.getString("OR_MEDICO")), (p.getDni()), (p.getNombre()), (obra.getNombre()));
-                    a.setNumero((resultSet.getInt("OR_NUMERO")));
-                    a.setEstado(resultSet.getString("ESTADO"));
-                    a.setBioquimico(resultSet.getString("OR_BIOQUIMICO"));
-
-                    datosOrdenes.add(a);
-                    System.out.println(a.getEstado());
-                    System.out.println(a.getNumero());
-
-                }
-            }
-            statement.close();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            ConnectionMethods.close(statement);
-        }
-        return datosOrdenes;
-    }
-
     public ArrayList<Orden> recuperarFilas() {
         Statement statement = null;
 
@@ -88,8 +50,7 @@ public class Manager_Ordenes {
                     a.setNumero((resultSet.getInt("OR_NUMERO")));
                     a.setEstado(resultSet.getString("ESTADO"));
 
-                    datosOrdenes.add(a);
-
+                    datosOrdenes.add(a);  
                 }
             }
             statement.close();
@@ -228,17 +189,9 @@ public class Manager_Ordenes {
 
         try {
             ps = ConnectionMethods.getConection().prepareStatement(insertSql);
-            /* ps.setInt(1, r.getCodigoOrden());
-            ps.setInt(2, r.getCodigoAnalisis());
-            ps.setString(3, r.getNombreAnalisis());
-            ps.setString(4, r.getValorTomado());
-            System.out.println("Justo antes de enviar a la base de datos, codigo de orden es: " + r.getCodigoOrden());
-            System.out.println("Justo antes de enviar a la base de datos, codigo de analisis es: " + r.getCodigoAnalisis());
-            System.out.println("Justo antes de enviar a la base de datos, nombre analisis es: " + r.getNombreAnalisis());
-            System.out.println("Justo antes de enviar a la base de datos, valor tomado es: " + r.getValorTomado());
-            
-             */
+          
             ps.executeUpdate();
+            System.out.println("EXITOOOO GATOOO");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -246,6 +199,44 @@ public class Manager_Ordenes {
             ConnectionMethods.close(ps);
         }
 
+    }
+    
+    public ArrayList<Orden> recuperarFilasTerminadas() {
+        Statement statement = null;
+
+        String query = "Select * FROM ORDEN,PACIENTE,'OBRA SOCIAL' WHERE ORDEN.ESTADO ='TERMINADO' AND ORDEN.P_DNI = PACIENTE.P_DNI AND ORDEN.OBRA_SOCIAL = 'OBRA SOCIAL'.O_NOMBRE ";
+
+        ArrayList<Orden> datosOrdenes = new ArrayList<Orden>();
+        Orden a;
+
+        try {
+            statement = ConnectionMethods.getConection().createStatement();
+
+            try (ResultSet resultSet = statement.executeQuery(query)) {
+                while (resultSet.next()) {
+                    Paciente p = new Paciente((resultSet.getString("P_NOMBRE")), (resultSet.getString("P_APELLIDO")), (resultSet.getInt("P_DNI")), (resultSet.getLong("P_TELEFONO")), (resultSet.getString("P_FECHA_NACIMIENTO")), (resultSet.getInt("P_EDAD")), (resultSet.getString("P_SEXO")));
+                    Obra_Social obra = new Obra_Social((resultSet.getString("O_NOMBRE")), resultSet.getLong("O_TELEFONO"), resultSet.getFloat("O_PUB"));
+
+                    a = new Orden((resultSet.getString("OR_FECHA")), (resultSet.getString("OR_MEDICO")), (p.getDni()), (p.getNombre()), (obra.getNombre()));
+                    a.setNumero((resultSet.getInt("OR_NUMERO")));
+                    a.setEstado(resultSet.getString("ESTADO"));
+                    a.setBioquimico(resultSet.getString("OR_BIOQUIMICO"));
+
+                    datosOrdenes.add(a);
+                    System.out.println(a.getEstado());
+                    System.out.println(a.getNumero());
+
+                }
+            }
+            statement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            ConnectionMethods.close(statement);
+        }
+        return datosOrdenes;
     }
 
     public int retornarCodigo() {

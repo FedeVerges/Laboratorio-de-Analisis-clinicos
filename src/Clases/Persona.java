@@ -12,9 +12,9 @@ package Clases;
 public class Persona {
     private String nombre;
     private String apellido;
-    private Long dni;
+    private int dni;
     
-    public Persona(String nom,String ape,Long dni){
+    public Persona(String nom,String ape,int dni){
         this.nombre=nom;
         this.apellido=ape;
         this.dni=dni;
@@ -28,7 +28,7 @@ public class Persona {
         this.apellido = apellido;
     }
 
-    public void setDni(Long dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
 
@@ -40,7 +40,7 @@ public class Persona {
         return apellido;
     }
 
-    public Long getDni() {
+    public int getDni() {
         return dni;
     }
     

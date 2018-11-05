@@ -14,7 +14,7 @@ public class Bioquimico extends Persona{
  private Orden orden;
  
 
-public Bioquimico(String cui,String nom,String ape,Long dni){
+public Bioquimico(String cui,String nom,String ape,int dni){
     super(nom,ape,dni);
     this.cuil=cui;
 }

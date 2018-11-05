@@ -23,6 +23,19 @@ public class Analisis{
     private int costoDescartables; // cantidad de descartables consumidos.
     private String valoresReferencia;
 
+    
+    // solo usado de forma auxiliar.
+    public Analisis(int codigo, String nombre) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.cantidadUnidadesB=0;
+        this.consentimiento="";
+        this.indicacionesPrevias="";
+        this.costoDescartables=0;
+        this.valoresReferencia="";
+    }
+    
+    
     public Analisis(int codigo, String nombre, String indicacionesPrevias, int cantidadUnidadesB, String consentimiento, int costoDescartables, String valoresReferencia) {
         this.codigo = codigo;
         this.nombre = nombre;
@@ -44,6 +57,7 @@ public class Analisis{
         this.valoresReferencia="";
     }
     
+
 
 
     public int getCodigo() {

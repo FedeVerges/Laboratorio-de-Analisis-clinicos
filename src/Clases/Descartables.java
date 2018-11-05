@@ -5,10 +5,32 @@
  */
 package Clases;
 
+import java.util.HashMap;
+
 /**
  *
  * @author fede_
  */
 public class Descartables {
+
+    private HashMap<String, Descartable> descartable;
+
+    public Descartables(HashMap<String, Descartable> descartable) {
+        this.descartable = descartable;
+    }
+
+    public HashMap<String, Descartable> getDescartable() {
+        return descartable;
+    }
+
+    public void setDescartable(HashMap<String, Descartable> descartable) {
+        this.descartable = descartable;
+    }
     
+    public void agregarDescartable(Descartable d){
+        this.descartable.put(d.getNombre(), d);
+    }
+    
+    
+
 }

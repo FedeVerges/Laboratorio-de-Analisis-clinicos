@@ -10,6 +10,22 @@ package Clases;
  * @author fede_
  */
 public class Descartable {
+    
+    
+    
+    
+    /***
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * 
+     * PLANTEAR LA BASE DE DATOS COMO UN MAPA CON CLAVE VALOR, DONDE LA CLAVE ES EL NOMBRE DEL ARTICULO Y EL VALOR ES LA CANTIDAD MENOR Y MAYOR DEL MISMO
+     * .
+     * 
+     */
     private String nombre;
     private int cantidadMinima;
     private int cantidadActual;
