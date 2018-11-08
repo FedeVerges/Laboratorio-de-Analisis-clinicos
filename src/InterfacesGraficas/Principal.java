@@ -1681,7 +1681,7 @@ public class Principal extends javax.swing.JFrame {
                     for (Analisis a : listaCodigos) {
                         System.out.println();
                         Resultado r = new Resultado(codigo, a.getCodigo(), a.getNombre());
-                        System.out.println(a.getCodigo());
+                        System.out.println("Estoy cargando"+ a.getCodigo());
                         System.out.println(a.getNombre());
 
                         mo.cargarResultado(r);
