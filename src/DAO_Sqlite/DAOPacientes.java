@@ -7,6 +7,7 @@ package DAO_Sqlite;
 
 import Base_de_Datos.ConnectionMethods;
 import Clases.Paciente;
+import com.sun.org.apache.bcel.internal.generic.D2F;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,98 +19,45 @@ import javax.swing.JOptionPane;
  *
  * @author fede_
  */
-public class DAOPacientes {
+public class DAOPacientes implements DAOPaciente{
 
-    public static ArrayList<Paciente> read() {
-        Statement statement = null;
-        String query = "SELECT * FROM PACIENTE";
-        ArrayList<Paciente> datosPaciente = new ArrayList<>();
+    @Override
+    public ArrayList<Paciente> read(){
+       return DataSrc.readPaciente();
+
+    }
+
+    public String readObrasocialPaciente(int dni) {
+       return DataSrc.readObrasocialPaciente(dni);
+        
+    }
+    
+    @Override
+    public Paciente create(){
         Paciente p;
-        try {
-            statement = ConnectionMethods.getConection().createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-
-            while (resultSet.next()) {
-                p = new Paciente((resultSet.getString("P_NOMBRE")), (resultSet.getString("P_APELLIDO")), (resultSet.getInt("P_DNI")), (resultSet.getLong("P_TELEFONO")), (resultSet.getString("P_FECHA_NACIMIENTO")), (resultSet.getInt("P_EDAD")), (resultSet.getString("P_SEXO")));
-                datosPaciente.add(p);
-
-            }
-
-            resultSet.close();
-            statement.close();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            ConnectionMethods.close(statement);
-        }
-        return datosPaciente;
-
+        p = new Paciente("", "", 0,Long.MIN_VALUE, "", 0, "");
+        return p;
     }
 
-    public static String readObrasocialPaciente(int dni) {
-        Statement statement = null;
-        String query = "SELECT NOM_OBRA from 'RELACION PACIENTE_OBRA' WHERE NUM_DNI =" + dni;
-        String obraSocial;
-        try {
-            statement = ConnectionMethods.getConection().createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            obraSocial = resultSet.getString("NOM_OBRA");
-            statement.close();
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "error al obtener la obra social del paciente");
-            return null;
-        } finally {
-            ConnectionMethods.close(statement);
-        }
-        return obraSocial;
-
+    @Override
+    public void insert(Paciente p) {
+        DataSrc.insertPaciente(p);
+        
     }
 
-    public static void createPaciente(String nombre, String apellido, int dni, Long telefono, String fNacimiento, int edad, String sexo) {
-        PreparedStatement ps = null;
-        String insertSql = "INSERT INTO 'PACIENTE' VALUES (?,?,?,?,?,?,?)";
-        try {
-            ps = ConnectionMethods.getConection().prepareStatement(insertSql);
-            ps.setString(1, nombre);
-            ps.setString(2, apellido);
-            ps.setInt(3, dni);
-            ps.setLong(4, telefono);
-            ps.setString(5, fNacimiento);
-            ps.setInt(6, edad);
-            ps.setString(7, sexo);
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "error al cargar en la base de datos en la tabla 'PACIENTE'");
-
-        } finally {
-            ConnectionMethods.close(ps);
-
-        }
-
+    @Override
+    public void insertObrasocial_Paciente(Paciente p) {
+        DataSrc.insertObrasocial_Paciente(p.getObraSocial().get(0).getNombre(),p.getDni());
+    }
+    @Override
+    public void update(Paciente p) {
+        DataSrc.updatePaciente(p);
+        
     }
 
-    public static void createObrasocial_Paciente(String nombreObraSocial, int dni) {
-        PreparedStatement ps = null;
-        String insertSql = "INSERT INTO 'RELACION PACIENTE_OBRA' VALUES (?,?)";
-        try {
-            ps = ConnectionMethods.getConection().prepareStatement(insertSql);
-            ps.setInt(1, dni);
-            ps.setString(2, nombreObraSocial);
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "error al cargar en la tabla 'OBRA SOCIAL'");
-
-        } finally {
-            ConnectionMethods.close(ps);
-
-        }
+    @Override
+    public void delete(Paciente p) {
+        DataSrc.deletePaciente(p);
     }
 
 }

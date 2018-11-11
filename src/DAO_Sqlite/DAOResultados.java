@@ -5,25 +5,38 @@
  */
 package DAO_Sqlite;
 
+import Clases.Resultado;
 import java.util.ArrayList;
 
 /**
  *
  * @author fede_
  */
-public class DAOResultados {
+public class DAOResultados implements DAOResultado {
 
-    public static ArrayList<Resultado> readResultado() {
-        return DataSrc.readResultado();
+    @Override
+    public ArrayList<Resultado> readResultado(int codigoOrden) {
+        return DataSrc.readResultado(codigoOrden);
     }
 
-    public static Resultado createResultado() {
-        return new Resultado("", "", 0, "", "");
+    @Override
+    public Resultado createResultado() {
+        return new Resultado(0, 0, "");
 
     }
 
-    public static void guardarResultado(Resultado orden) {
-        DataSrc.insertResultado(orden);
+    @Override
+    public void insertResultado(Resultado resultado) {
+        DataSrc.insertResultado(resultado);
+    }
+    @Override
+    public void updateResultado(Resultado resultado){
+        DataSrc.updateResultado(resultado);
+    }
+
+    @Override
+    public void deteleResultado(Resultado r) {
+        DataSrc.deleteResultado(r);
     }
 
 }

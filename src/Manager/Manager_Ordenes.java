@@ -13,6 +13,7 @@ import Clases.Orden;
 import Clases.Paciente;
 import Clases.Resultado;
 import DAO_Sqlite.DAOOrdenes;
+import DAO_Sqlite.DAOResultados;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -30,57 +31,31 @@ import java.util.Date;
  * @author fede_
  */
 public class Manager_Ordenes {
+    DAOOrdenes daoOrdenes = new DAOOrdenes();
+    DAOResultados daoResultado = new DAOResultados();
 
     public ArrayList<Orden> recuperarFilas() {
-        return DAOOrdenes.readOrden();
+        return daoOrdenes.readOrden();
     }
 
     public int cargarOrden(String fecha, String medico, int dni, String nombrePaciente, String nombreObraSocial) {
-        Orden orden = DAOOrdenes.createOrden();
+        Orden orden = daoOrdenes.createOrden();
         int codigo = 0;
         orden.setFechaDeIngreso(fecha);
         orden.setMedico(medico);
-        orden.setDniPaciente(dni);
-        orden.setNombrePaciente(nombrePaciente);
-        orden.setObraSocial(nombreObraSocial);
+        orden.getPaciente().setDni(dni);
+        orden.getPaciente().setNombre(nombrePaciente);
+        orden.getObraSocial().setNombre(nombreObraSocial);
         orden.setNumero(retornarCodigo());  // le asigno un numero de orden. 
          
         codigo = orden.getNumero(); // retorno el codigo de la orden.
-        DAOOrdenes.guardarOrden(orden);
+        daoOrdenes.guardarOrden(orden);
         return codigo;
     }
 
     public ArrayList<Resultado> recuperarFilasResultados(int codigoOrden) {
-
-        Statement statement = null;
-        String query = "SELECT * FROM RESULTADOS WHERE RESULTADOS.ORDEN_NUMERO = " + codigoOrden;
-
-        ArrayList<Resultado> datosResultados = new ArrayList<Resultado>();
-        Resultado a;
-        try {
-            statement = ConnectionMethods.getConection().createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-
-            while (resultSet.next()) {
-
-                a = new Resultado((resultSet.getInt("ORDEN_NUMERO")), (resultSet.getInt("CODIGO_ANALISIS")), (resultSet.getString("NOMBRE_ANALISIS")));
-                System.out.println((resultSet.getInt("ORDEN_NUMERO")));
-                datosResultados.add(a);
-                System.out.println("El codigo de la orden es" + a.getCodigoOrden());
-                System.out.println("El codigo del analisis es:" + a.getCodigoAnalisis());
-                System.out.println("El nombre del analisis es " + a.getNombreAnalisis());
-            }
-            resultSet.close();
-            statement.close();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            ConnectionMethods.close(statement);
-        }
-
-        return datosResultados;
+        return daoResultado.readResultado(codigoOrden);
+        
     }
 
     public void recuperarResultadosDeTabla(DefaultTableModel modelo, JTable tabla, String bio) throws SQLException {
@@ -91,16 +66,13 @@ public class Manager_Ordenes {
         //AGREGAR CONTROLES!!!
         for (i = 0; i < fila; i++) {
             {
-                Resultado r = new Resultado((Integer) (modelo.getValueAt(i, 0)), (Integer) (modelo.getValueAt(i, 1)), (modelo.getValueAt(i, 2).toString()), (modelo.getValueAt(i, 3)).toString());
-                System.out.println("En recuperarResultadosDeTabla tengo nombre de analisis:" + r.getNombreAnalisis());
-                System.out.println("En recuperarResultadosDeTabla tengo codigo de analisis:" + r.getCodigoAnalisis());
-                System.out.println("En recuperarResultadosDeTabla tengo codigo de orden: " + r.getCodigoOrden());
-
-                r.getNombreAnalisis();
-                r.getValorTomado();
-                r.getCodigoAnalisis();
-                r.getCodigoOrden();
-                cargarResultado(r);
+                Resultado r = daoResultado.createResultado();
+                r.setCodigoOrden((Integer) (modelo.getValueAt(i, 0)));
+                r.setCodigoAnalisis((Integer) (modelo.getValueAt(i, 1)));
+                r.setNombreAnalisis(modelo.getValueAt(i, 2).toString());
+                r.setValorTomado((modelo.getValueAt(i, 3)).toString());
+                
+                cargarResultado(r.getCodigoOrden(),r.getCodigoAnalisis(),r.getNombreAnalisis(),r.getValorTomado());
                 finalizarOrden(r.getCodigoOrden(), bioquimico);
             }
         }
@@ -108,91 +80,29 @@ public class Manager_Ordenes {
     }
 
     public void finalizarOrden(int CodigoOrden, String bioquimico) throws SQLException {
-        Orden orden = DAOOrdenes.createOrden();
-        orden.setBioquimico(bioquimico);
+        Orden orden = daoOrdenes.createOrden();
+        orden.getBioquimico().setNombre(bioquimico);
         orden.setNumero(CodigoOrden);
-        DAOOrdenes.modificarOrdenResultado(orden);
+        daoOrdenes.modificarOrdenResultado(orden);
     }
 
-    public void cargarResultado(Resultado r) throws SQLException {
-        PreparedStatement ps = null;
-        String resultado = r.getValorTomado();
-        System.out.println("valor tomado es: " + resultado);
-        int codigo = r.getCodigoAnalisis();
-        int numeroOrden = r.getCodigoOrden();
-        // debo cargar el resultado nulo y despues modificarlo 
-        
-
-        String insertSql = "UPDATE RESULTADOS SET RES_VALOR = " + "'" + resultado + "'" + " where ORDEN_NUMERO =" + numeroOrden + " AND CODIGO_ANALISIS = " + codigo;
-
-        try {
-            ps = ConnectionMethods.getConection().prepareStatement(insertSql);
-
-            ps.executeUpdate();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            
-        } finally {
-            ConnectionMethods.close(ps);
-        }
-
+    public void cargarResultado(int codigo, int codigoAnalisis,String nombre,String valor) throws SQLException {
+        Resultado res = daoResultado.createResultado();
+        res.setCodigoOrden(codigo);
+        res.setCodigoAnalisis(codigoAnalisis);
+        res.setNombreAnalisis(nombre);
+        res.setValorTomado(valor);
+        daoResultado.insertResultado(res);
     }
 
     public ArrayList<Orden> recuperarFilasTerminadas() {
-        Statement statement = null;
-
-        String query = "Select * FROM ORDEN,PACIENTE,'OBRA SOCIAL' WHERE ORDEN.ESTADO ='TERMINADO' AND ORDEN.P_DNI = PACIENTE.P_DNI AND ORDEN.OBRA_SOCIAL = 'OBRA SOCIAL'.O_NOMBRE ";
-
-        ArrayList<Orden> datosOrdenes = new ArrayList<Orden>();
-        Orden a;
-
-        try {
-            statement = ConnectionMethods.getConection().createStatement();
-
-            try (ResultSet resultSet = statement.executeQuery(query)) {
-                while (resultSet.next()) {
-                    Paciente p = new Paciente((resultSet.getString("P_NOMBRE")), (resultSet.getString("P_APELLIDO")), (resultSet.getInt("P_DNI")), (resultSet.getLong("P_TELEFONO")), (resultSet.getString("P_FECHA_NACIMIENTO")), (resultSet.getInt("P_EDAD")), (resultSet.getString("P_SEXO")));
-                    Obra_Social obra = new Obra_Social((resultSet.getString("O_NOMBRE")), resultSet.getLong("O_TELEFONO"), resultSet.getFloat("O_PUB"));
-
-                    a = new Orden((resultSet.getString("OR_FECHA")), (resultSet.getString("OR_MEDICO")), (p.getDni()), (p.getNombre()), (obra.getNombre()));
-                    a.setNumero((resultSet.getInt("OR_NUMERO")));
-                    a.setEstado(resultSet.getString("ESTADO"));
-                    a.setBioquimico(resultSet.getString("OR_BIOQUIMICO"));
-
-                    datosOrdenes.add(a);
-                    System.out.println(a.getEstado());
-                    System.out.println(a.getNumero());
-
-                }
-            }
-            statement.close();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            ConnectionMethods.close(statement);
-        }
-        return datosOrdenes;
+        return daoOrdenes.readOrdenesTerminadas();
     }
 
     public int retornarCodigo() {
-        Statement statement = null;
-        int codigo = 0;
-
-        String query = "SELECT max(ORDEN.OR_NUMERO) FROM ORDEN";
-        try {
-            statement = ConnectionMethods.getConection().createStatement();
-            ResultSet resultSet = statement.executeQuery(query);
-            codigo = resultSet.getInt("max(ORDEN.OR_NUMERO)") + 1;
-
-        } catch (SQLException e) {
-
-        } finally {
-            ConnectionMethods.close(statement);
-        }
-        return codigo;
-
+        return daoOrdenes.retornarCodigo();
     }
+        
+
+   
 }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ 
 package Manager;
 
 import Base_de_Datos.ConnectionMethods;
@@ -24,24 +20,35 @@ import javax.swing.table.DefaultTableModel;
  * @author fede_
  */
 public class ManagerPaciente {
+    DAOPacientes daoPaciente = new DAOPacientes();
     
 
     public ArrayList<Paciente> recuperarFilas() {
-        return DAOPacientes.read();
+        return daoPaciente.read();
     }
 
     public String recuperarObraSocial(int dni) {
-        return DAOPacientes.readObrasocialPaciente(dni);
+        return daoPaciente.readObrasocialPaciente(dni);
 
     }
 
     public void cargarPaciente(String nombre, String apellido, int dni, Long telefono, String fNacimiento, int edad, String sexo) throws SQLException {
-       DAOPacientes.createPaciente(nombre, apellido, dni, telefono, fNacimiento, edad, sexo);
-
+       Paciente p = daoPaciente.create();
+       p.setNombre(nombre);
+       p.setApellido(apellido);
+       p.setDni(dni);
+       p.setTelefono(telefono);
+       p.setFechaNacimiento(fNacimiento);
+       p.setEdad(edad);
+       p.setSexo(sexo);
+       daoPaciente.insert(p);
     }
 
     public void cargarObraSocialPaciente(String nombreObraSocial, int dni) {
-        DAOPacientes.createObrasocial_Paciente(nombreObraSocial, dni);
+        Paciente p = daoPaciente.create();
+        p.setDni(dni);
+        p.setObraSocial(nombreObraSocial);
+        daoPaciente.insertObrasocial_Paciente(p);
     }
 
     public Paciente recupararPaciente(DefaultTableModel modelo, JTable tabla) {

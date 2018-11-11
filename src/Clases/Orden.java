@@ -5,6 +5,7 @@
  */
 package Clases;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -14,30 +15,33 @@ import java.util.Random;
  * @author fede_
  */
 public class Orden {
+
     private int numero;
     private String fechaDeIngreso;
     private String Medico;
-    private int dniPaciente;
-    private String nombrePaciente;
-    private String obraSocial;
+    private Paciente paciente;
+    private Obra_Social obraSocial;
     private String estado;
-    private String bioquimico;
+    private Bioquimico  bioquimico;
+    private ArrayList<Analisis> analisis;
 
-    public Orden(String fechaDeIngreso, String Medico, int dniPaciente,String nombrePaciente, String obraSocial) {
+    public Orden(String fechaDeIngreso, String Medico, int dniPaciente, String nombrePaciente, String obraSocial) {
+        this.analisis = new ArrayList<>();
+        this.paciente = new Paciente();
+        this.bioquimico = new Bioquimico();
+        this.obraSocial = new Obra_Social();
         this.fechaDeIngreso = fechaDeIngreso;
         this.Medico = Medico;
-        this.dniPaciente = dniPaciente;
-        this.nombrePaciente = nombrePaciente;
-        this.obraSocial = obraSocial;
+        this.paciente.setDni(dniPaciente);
+        this.paciente.setNombre (nombrePaciente);
+        this.obraSocial.setNombre(obraSocial);
         this.estado = "PENDIENTE";
     }
-    
-    
 
-    
     public int getNumero() {
         return numero;
     }
+
     public void setNumero(int numero) {
         this.numero = numero;
     }
@@ -58,56 +62,48 @@ public class Orden {
         this.Medico = Medico;
     }
 
-    public int getDniPaciente() {
-        return dniPaciente;
-    }
-
-    public void setDniPaciente(int dniPaciente) {
-        this.dniPaciente = dniPaciente;
-    }
-
-    public String getNombrePaciente() {
-        return nombrePaciente;
-    }
-
-    public void setNombrePaciente(String nombrePaciente) {
-        this.nombrePaciente = nombrePaciente;
-    }
-    
-
-    public String getObraSocial() {
-        return obraSocial;
-    }
-
-    public void setObraSocial(String obraSocial) {
-        this.obraSocial = obraSocial;
-    }
-
     public String getEstado() {
         return estado;
     }
 
+    public Paciente getPaciente() {
+        return paciente;
+    }
+
+    public Obra_Social getObraSocial() {
+        return obraSocial;
+    
+    }
+
+    public Bioquimico getBioquimico() {
+        return bioquimico;
+    }
+
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
+    public void setObraSocial(Obra_Social obraSocial) {
+        this.obraSocial = obraSocial;
+    }
+    
     public void setEstado(String estado) {
         this.estado = estado;
     }
 
-    public String getBioquimico() {
-        return bioquimico;
-    }
-
-    public void setBioquimico(String bioquimico) {
+    public void setBioquimico(Bioquimico bioquimico) {
         this.bioquimico = bioquimico;
     }
+
+    
+    public ArrayList<Analisis> getAnalisis() {
+        return analisis;
+    }
+
+    public void setAnalisis(ArrayList<Analisis> analisis) {
+        this.analisis = analisis;
+    }
     
     
 
-    
-
-    
-    
-    
-    
-    
-    
-    
 }

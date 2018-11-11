@@ -96,10 +96,8 @@ public class Principal extends javax.swing.JFrame {
         // tabla Listado de Pacientes
         modeloTablaListadoPacientes = (DefaultTableModel) jTable_ListadoPacientes.getModel();
         jTable_ListadoPacientes.setModel(modeloTablaListadoPacientes);
-        
-        // Tomar siempre la fecha actual de JdateChooser
-       
 
+        // Tomar siempre la fecha actual de JdateChooser
         cargarTablaAnalisis(datosAnalisis);
         cargarTablaAnalisisParaSeleccionar(datosAnalisis);
         cargarTablaOrdenesPendientes();
@@ -133,6 +131,7 @@ public class Principal extends javax.swing.JFrame {
 
     // metodo para bloquear los campos de texto de los datos del paciente.
     public void bloquear() {
+
         jTextField_Nombre.setEnabled(false);
         jTextField_Apellido.setEnabled(false);
         jTextField_dni.setEnabled(false);
@@ -142,6 +141,7 @@ public class Principal extends javax.swing.JFrame {
         jRadioButton_femenino.setEnabled(false);
         jRadioButton_masculino.setEnabled(false);
         jComboBox_ObraSocial.setEnabled(false);
+
     }
 
     // Metodo para listar los analisis por numero de orden.
@@ -172,10 +172,10 @@ public class Principal extends javax.swing.JFrame {
             jTable2_TablaOrdenesTerminadas.setValueAt(i.getNumero(), fila, 0);
             jTable2_TablaOrdenesTerminadas.setValueAt(i.getFechaDeIngreso(), fila, 1);
             jTable2_TablaOrdenesTerminadas.setValueAt(i.getMedico(), fila, 2);
-            jTable2_TablaOrdenesTerminadas.setValueAt(i.getDniPaciente(), fila, 3);
-            jTable2_TablaOrdenesTerminadas.setValueAt(i.getNombrePaciente(), fila, 4);
-            jTable2_TablaOrdenesTerminadas.setValueAt(i.getObraSocial(), fila, 5);
-            jTable2_TablaOrdenesTerminadas.setValueAt(i.getBioquimico(), fila, 6);
+            jTable2_TablaOrdenesTerminadas.setValueAt(i.getPaciente().getDni(), fila, 3);
+            jTable2_TablaOrdenesTerminadas.setValueAt(i.getPaciente().getNombre(), fila, 4);
+            jTable2_TablaOrdenesTerminadas.setValueAt(i.getObraSocial().getNombre(), fila, 5);
+            jTable2_TablaOrdenesTerminadas.setValueAt(i.getBioquimico().getNombre(), fila, 6);
 
             fila++;
         }
@@ -195,9 +195,9 @@ public class Principal extends javax.swing.JFrame {
             jTable2_TablaOrdenesPendientes.setValueAt(i.getNumero(), fila, 0);
             jTable2_TablaOrdenesPendientes.setValueAt(i.getFechaDeIngreso(), fila, 1);
             jTable2_TablaOrdenesPendientes.setValueAt(i.getMedico(), fila, 2);
-            jTable2_TablaOrdenesPendientes.setValueAt(i.getDniPaciente(), fila, 3);
-            jTable2_TablaOrdenesPendientes.setValueAt(i.getNombrePaciente(), fila, 4);
-            jTable2_TablaOrdenesPendientes.setValueAt(i.getObraSocial(), fila, 5);
+            jTable2_TablaOrdenesPendientes.setValueAt(i.getPaciente().getDni(), fila, 3);
+            jTable2_TablaOrdenesPendientes.setValueAt(i.getPaciente().getNombre(), fila, 4);
+            jTable2_TablaOrdenesPendientes.setValueAt(i.getObraSocial().getNombre(), fila, 5);
 
             fila++;
         }
@@ -217,9 +217,9 @@ public class Principal extends javax.swing.JFrame {
             jTable3_TablaPestanaOrdenesPendientes.setValueAt(i.getNumero(), fila, 0);
             jTable3_TablaPestanaOrdenesPendientes.setValueAt(i.getFechaDeIngreso(), fila, 1);
             jTable3_TablaPestanaOrdenesPendientes.setValueAt(i.getMedico(), fila, 2);
-            jTable3_TablaPestanaOrdenesPendientes.setValueAt(i.getDniPaciente(), fila, 3);
-            jTable3_TablaPestanaOrdenesPendientes.setValueAt(i.getNombrePaciente(), fila, 4);
-            jTable3_TablaPestanaOrdenesPendientes.setValueAt(i.getObraSocial(), fila, 5);
+            jTable3_TablaPestanaOrdenesPendientes.setValueAt(i.getPaciente().getDni(), fila, 3);
+            jTable3_TablaPestanaOrdenesPendientes.setValueAt(i.getPaciente().getNombre(), fila, 4);
+            jTable3_TablaPestanaOrdenesPendientes.setValueAt(i.getObraSocial().getNombre(), fila, 5);
 
             fila++;
         }
@@ -260,6 +260,9 @@ public class Principal extends javax.swing.JFrame {
         jDialog_ListadoPacientes = new javax.swing.JDialog();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable_ListadoPacientes = new javax.swing.JTable();
+        datosAnalisis_CargarOrden9 = new javax.swing.JLabel();
+        jTextField_buscadorAnalisis1 = new javax.swing.JTextField();
+        jComboBox_buscador1 = new javax.swing.JComboBox<>();
         jTabbedPane_menuPestañas = new javax.swing.JTabbedPane();
         jPanel_CargarOrden = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -312,11 +315,6 @@ public class Principal extends javax.swing.JFrame {
         datosAnalisis_CargarOrden6 = new javax.swing.JLabel();
         jScrollPane12 = new javax.swing.JScrollPane();
         jTable3_TablaPestanaOrdenesPendientes = new javax.swing.JTable();
-        jPanel3ImprimirResultados = new javax.swing.JPanel();
-        datosAnalisis_CargarOrden7 = new javax.swing.JLabel();
-        jScrollPane10 = new javax.swing.JScrollPane();
-        jTable2_TablaOrdenesTerminadas = new javax.swing.JTable();
-        jButton2CargarResultado1 = new javax.swing.JButton();
         jPanel_stock = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
@@ -329,6 +327,14 @@ public class Principal extends javax.swing.JFrame {
         jSpinner1 = new javax.swing.JSpinner();
         jSpinner2 = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
+        jPanel3ImprimirResultados = new javax.swing.JPanel();
+        datosAnalisis_CargarOrden7 = new javax.swing.JLabel();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jTable2_TablaOrdenesTerminadas = new javax.swing.JTable();
+        jButton2CargarResultado1 = new javax.swing.JButton();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        datosAnalisis_CargarOrden8 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jButton_Femenino = new javax.swing.JButton();
         jButton_Analisis_CargarOrden1 = new javax.swing.JButton();
@@ -403,17 +409,61 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane8.setViewportView(jTable_ListadoPacientes);
 
+        datosAnalisis_CargarOrden9.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        datosAnalisis_CargarOrden9.setText("Listado Análisis");
+
+        jTextField_buscadorAnalisis1.setText("Ingrese aqui lo que desea buscar...");
+        jTextField_buscadorAnalisis1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTextField_buscadorAnalisis1FocusGained(evt);
+            }
+        });
+        jTextField_buscadorAnalisis1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_buscadorAnalisis1ActionPerformed(evt);
+            }
+        });
+        jTextField_buscadorAnalisis1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField_buscadorAnalisis1KeyPressed(evt);
+            }
+        });
+
+        jComboBox_buscador1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Codigo" }));
+        jComboBox_buscador1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_buscador1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jDialog_ListadoPacientesLayout = new javax.swing.GroupLayout(jDialog_ListadoPacientes.getContentPane());
         jDialog_ListadoPacientes.getContentPane().setLayout(jDialog_ListadoPacientesLayout);
         jDialog_ListadoPacientesLayout.setHorizontalGroup(
             jDialog_ListadoPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog_ListadoPacientesLayout.createSequentialGroup()
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 738, Short.MAX_VALUE)
-                .addContainerGap())
+                .addContainerGap()
+                .addGroup(jDialog_ListadoPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jDialog_ListadoPacientesLayout.createSequentialGroup()
+                        .addComponent(datosAnalisis_CargarOrden9, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_buscadorAnalisis1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox_buscador1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         jDialog_ListadoPacientesLayout.setVerticalGroup(
             jDialog_ListadoPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
+            .addGroup(jDialog_ListadoPacientesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog_ListadoPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jDialog_ListadoPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(datosAnalisis_CargarOrden9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextField_buscadorAnalisis1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox_buscador1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -452,14 +502,19 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jTextField_Nombre.setText("Nombre");
+        jTextField_Nombre.setText("ingrese el nombre");
         jTextField_Nombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField_NombreFocusGained(evt);
             }
         });
+        jTextField_Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextField_NombreKeyTyped(evt);
+            }
+        });
 
-        jTextField_Apellido.setText("Apellido");
+        jTextField_Apellido.setText("ingrese el apellido");
         jTextField_Apellido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField_ApellidoFocusGained(evt);
@@ -471,7 +526,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jTextField_dni.setText("DNI");
+        jTextField_dni.setText("ingrese el dni");
         jTextField_dni.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField_dniFocusGained(evt);
@@ -483,7 +538,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        jTextField_telefono.setText("Telefono");
+        jTextField_telefono.setText("ingrese el telefono");
         jTextField_telefono.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField_telefonoFocusGained(evt);
@@ -525,7 +580,7 @@ public class Principal extends javax.swing.JFrame {
         jTextArea_cargarOrden.setRows(5);
         jScrollPane4.setViewportView(jTextArea_cargarOrden);
 
-        jTextField_Edad.setText("Edad");
+        jTextField_Edad.setText("ingrese la edad");
         jTextField_Edad.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField_EdadFocusGained(evt);
@@ -679,7 +734,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton_ListadoPaciente_CargarOrden))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 18, Short.MAX_VALUE)))
+                        .addGap(0, 29, Short.MAX_VALUE)))
                 .addGap(17, 17, 17)
                 .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
@@ -689,7 +744,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CargarOrdenLayout.createSequentialGroup()
-                                .addGap(0, 17, Short.MAX_VALUE)
+                                .addGap(0, 28, Short.MAX_VALUE)
                                 .addComponent(datosAnalisis_CargarOrden5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField_buscadorAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -917,7 +972,7 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jButton2CargarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 866, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
                     .addComponent(jScrollPane6)
                     .addGroup(jPanel2_cargarResultadosLayout.createSequentialGroup()
                         .addComponent(datosAnalisis_CargarOrden2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -997,11 +1052,11 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(datosAnalisis_CargarOrden6, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(796, Short.MAX_VALUE))
+                .addContainerGap(818, Short.MAX_VALUE))
             .addGroup(jPanel2ListarOrdenesPendientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 1176, Short.MAX_VALUE)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 1198, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel2ListarOrdenesPendientesLayout.setVerticalGroup(
@@ -1018,78 +1073,6 @@ public class Principal extends javax.swing.JFrame {
         );
 
         jTabbedPane_menuPestañas.addTab("Listar Ordenes Pendientes", jPanel2ListarOrdenesPendientes);
-
-        datosAnalisis_CargarOrden7.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
-        datosAnalisis_CargarOrden7.setText("Listado de ordenes terminadas:");
-
-        jTable2_TablaOrdenesTerminadas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Numero de Orden", "Fecha de Ingreso", "Medico", "DNI Paciente", "Paciente", "Obra Social", "Biquimico"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable2_TablaOrdenesTerminadas.getTableHeader().setReorderingAllowed(false);
-        jTable2_TablaOrdenesTerminadas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable2_TablaOrdenesTerminadasMouseClicked(evt);
-            }
-        });
-        jScrollPane10.setViewportView(jTable2_TablaOrdenesTerminadas);
-
-        jButton2CargarResultado1.setText("Imprimir Resultado");
-        jButton2CargarResultado1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2CargarResultado1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3ImprimirResultadosLayout = new javax.swing.GroupLayout(jPanel3ImprimirResultados);
-        jPanel3ImprimirResultados.setLayout(jPanel3ImprimirResultadosLayout);
-        jPanel3ImprimirResultadosLayout.setHorizontalGroup(
-            jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3ImprimirResultadosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 1176, Short.MAX_VALUE)
-                    .addGroup(jPanel3ImprimirResultadosLayout.createSequentialGroup()
-                        .addComponent(datosAnalisis_CargarOrden7, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3ImprimirResultadosLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2CargarResultado1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(69, 69, 69))
-        );
-        jPanel3ImprimirResultadosLayout.setVerticalGroup(
-            jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3ImprimirResultadosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(datosAnalisis_CargarOrden7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                .addComponent(jButton2CargarResultado1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
-        );
-
-        jTabbedPane_menuPestañas.addTab("Imprimir Resultados", jPanel3ImprimirResultados);
 
         jLabel3.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
         jLabel3.setText("Stock");
@@ -1137,7 +1120,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_stockLayout.createSequentialGroup()
-                        .addComponent(jLabel_nombreStock, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
+                        .addComponent(jLabel_nombreStock, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                         .addGap(268, 268, 268))
                     .addGroup(jPanel_stockLayout.createSequentialGroup()
                         .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1180,10 +1163,98 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton_ActualzarStock, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
 
         jTabbedPane_menuPestañas.addTab("Stock", jPanel_stock);
+
+        datosAnalisis_CargarOrden7.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        datosAnalisis_CargarOrden7.setText("Listado de ordenes terminadas:");
+
+        jTable2_TablaOrdenesTerminadas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numero de Orden", "Fecha de Ingreso", "Medico", "DNI Paciente", "Paciente", "Obra Social", "Biquimico"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2_TablaOrdenesTerminadas.getTableHeader().setReorderingAllowed(false);
+        jTable2_TablaOrdenesTerminadas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2_TablaOrdenesTerminadasMouseClicked(evt);
+            }
+        });
+        jScrollPane10.setViewportView(jTable2_TablaOrdenesTerminadas);
+
+        jButton2CargarResultado1.setText("Imprimir Resultado");
+        jButton2CargarResultado1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2CargarResultado1ActionPerformed(evt);
+            }
+        });
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane11.setViewportView(jTextArea1);
+
+        datosAnalisis_CargarOrden8.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        datosAnalisis_CargarOrden8.setText("Vista Previa");
+
+        javax.swing.GroupLayout jPanel3ImprimirResultadosLayout = new javax.swing.GroupLayout(jPanel3ImprimirResultados);
+        jPanel3ImprimirResultados.setLayout(jPanel3ImprimirResultadosLayout);
+        jPanel3ImprimirResultadosLayout.setHorizontalGroup(
+            jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3ImprimirResultadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3ImprimirResultadosLayout.createSequentialGroup()
+                        .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 776, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(datosAnalisis_CargarOrden7, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                            .addGroup(jPanel3ImprimirResultadosLayout.createSequentialGroup()
+                                .addComponent(datosAnalisis_CargarOrden8, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3ImprimirResultadosLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton2CargarResultado1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        jPanel3ImprimirResultadosLayout.setVerticalGroup(
+            jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3ImprimirResultadosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(datosAnalisis_CargarOrden7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(datosAnalisis_CargarOrden8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane11)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2CargarResultado1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        jTabbedPane_menuPestañas.addTab("Imprimir Resultados", jPanel3ImprimirResultados);
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
@@ -1207,19 +1278,19 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane_menuPestañas)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTabbedPane_menuPestañas, javax.swing.GroupLayout.PREFERRED_SIZE, 1207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(jTabbedPane_menuPestañas, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addComponent(jTabbedPane_menuPestañas, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46))
         );
 
         pack();
@@ -1299,11 +1370,27 @@ public class Principal extends javax.swing.JFrame {
 
     }
 
-    public Boolean ValidarCampos(String fechaIngreso, String medico, String nombre, String apellido, int dni, Long telefono, int edad, String fechaNacimiento) {
+    public Boolean ValidarCampos() {
 
         Boolean control = true;
         ManagerPaciente mp = new ManagerPaciente();
         ArrayList<Paciente> pacientes = mp.recuperarFilas();
+
+        // Datos Ordenes
+        String fechaIngreso = dameFecha(jDateChooserfechaIngreso.getDate());
+        String nombreMedico = jTextField_Medico_CargarOrden.getText();
+
+        // Datos Paciente
+        String nombre = jTextField_Nombre.getText();
+        String apellido = jTextField_Apellido.getText();
+        int dni = 0;
+        Long telefono = null;
+        String fNacimiento; // se pasa la fecha a formato String
+        int edad = 0;
+        String sexo;
+        Date fecha = jDateChooser_fechaNacimiento.getDate();
+
+        fNacimiento = dameFecha(fecha);
 
         // Control fecha ingreso vacia
         if (control) {
@@ -1318,8 +1405,12 @@ public class Principal extends javax.swing.JFrame {
             jTextField_Medico_CargarOrden.setBackground(Color.white);
             String regex = "^[a-zA-Z][a-zA-Z\\s]*$";
             Pattern pattern = Pattern.compile(regex);
-            Matcher matcher = pattern.matcher(medico);
+            Matcher matcher = pattern.matcher(nombreMedico);
             if (!matcher.matches()) {
+                jTextField_Medico_CargarOrden.setBackground(Color.red);
+                control = false;
+            }
+            if (nombreMedico.equalsIgnoreCase("")) {
                 jTextField_Medico_CargarOrden.setBackground(Color.red);
                 control = false;
             }
@@ -1331,7 +1422,13 @@ public class Principal extends javax.swing.JFrame {
             String regex = "^[a-zA-Z][a-zA-Z\\s]*$";
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(nombre);
+            System.out.println(nombre);
             if (!matcher.matches()) {
+                System.out.println("PIOLAZOO");
+                jTextField_Nombre.setBackground(Color.red);
+                control = false;
+            }
+            if (nombre.equalsIgnoreCase("ingrese el nombre")) {
                 jTextField_Nombre.setBackground(Color.red);
                 control = false;
             }
@@ -1348,11 +1445,23 @@ public class Principal extends javax.swing.JFrame {
                 jTextField_Apellido.setBackground(Color.red);
                 control = false;
             }
+            if (apellido.equalsIgnoreCase("ingrese el apellido")) {
+                jTextField_Apellido.setBackground(Color.red);
+                control = false;
+            }
         }
 
         // Control Dni por tamaño 
         if (control) {
             jTextField_dni.setBackground(Color.white);
+            try {
+                dni = Integer.parseInt(jTextField_dni.getText());
+            } catch (NumberFormatException | NullPointerException e) {
+                jTextField_dni.setBackground(Color.MAGENTA);
+                System.out.println("asdasdasd");
+                control = false;
+            }
+
             if (dni > 99999999 || dni < 1000000) {
                 jTextField_dni.setBackground(Color.red);
                 control = false;
@@ -1372,6 +1481,12 @@ public class Principal extends javax.swing.JFrame {
         // Control edad por tamaño
         if (control) {
             jTextField_Edad.setBackground(Color.white);
+            try {
+                edad = Integer.parseInt(jTextField_Edad.getText());
+
+            } catch (NumberFormatException e) {
+                jTextField_Edad.setBackground(Color.MAGENTA);
+            }
             if (edad > 120 || edad < 1) {
                 jTextField_Edad.setBackground(Color.red);
             }
@@ -1382,17 +1497,42 @@ public class Principal extends javax.swing.JFrame {
             jDateChooser_fechaNacimiento.setForeground(Color.white);
 
             int año = Calendar.getInstance().get(Calendar.YEAR);
-            int añoNacimiento = jDateChooser_fechaNacimiento.getCalendar().get(Calendar.YEAR);
-            if (edad != año - añoNacimiento) {
-                jTextField_Edad.setBackground(Color.red);
+            try {
+                int añoNacimiento = jDateChooser_fechaNacimiento.getCalendar().get(Calendar.YEAR);
+                if (edad != año - añoNacimiento) {
+                    jTextField_Edad.setBackground(Color.red);
+                    jDateChooser_fechaNacimiento.setForeground(Color.red);
+                    control = false;
+                }
+            } catch (NullPointerException e) {
                 jDateChooser_fechaNacimiento.setForeground(Color.red);
-                control = false;
             }
+
+        }
+
+        // control telefono 
+        if (control) {
+            try {
+                String tel = jTextField_telefono.getText();
+                telefono = Long.parseLong(jTextField_telefono.getText());
+                jTextField_telefono.setBackground(Color.white);
+                String regex = "^([0-9][ -]*){8-15}";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(tel);
+                if (!matcher.matches()) {
+                    jTextField_telefono.setBackground(Color.red);
+                    control = false;
+                }
+            } catch (NumberFormatException e) {
+                jTextField_telefono.setBackground(Color.red);
+
+            }
+
         }
 
         // Control fecha nacimiento vacio
         if (control) {
-            if (fechaNacimiento == null) {
+            if (fNacimiento == null) {
                 jDateChooser_fechaNacimiento.setForeground(Color.red);
                 control = false;
             }
@@ -1459,7 +1599,7 @@ public class Principal extends javax.swing.JFrame {
 
         for (Orden o : ordenes) {
 
-            String buscando = o.getNombrePaciente();
+            String buscando = o.getPaciente().getNombre();
             buscando = buscando.toUpperCase();
             System.out.println("El string buscando dentro del for es: " + buscando);
 
@@ -1468,8 +1608,8 @@ public class Principal extends javax.swing.JFrame {
                 jTable2_TablaOrdenesPendientes.setValueAt(o.getNumero(), fila, 0);
                 jTable2_TablaOrdenesPendientes.setValueAt(o.getFechaDeIngreso(), fila, 1);
                 jTable2_TablaOrdenesPendientes.setValueAt(o.getMedico(), fila, 2);
-                jTable2_TablaOrdenesPendientes.setValueAt(o.getDniPaciente(), fila, 3);
-                jTable2_TablaOrdenesPendientes.setValueAt(o.getNombrePaciente(), fila, 4);
+                jTable2_TablaOrdenesPendientes.setValueAt(o.getPaciente().getDni(), fila, 3);
+                jTable2_TablaOrdenesPendientes.setValueAt(o.getPaciente().getNombre(), fila, 4);
                 jTable2_TablaOrdenesPendientes.setValueAt(o.getObraSocial(), fila, 5);
                 fila++;
             }
@@ -1578,11 +1718,11 @@ public class Principal extends javax.swing.JFrame {
     private void jButton_ListadoPaciente_CargarOrden1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListadoPaciente_CargarOrden1ActionPerformed
         flag = 2;
         desbloquear();
-        jTextField_Nombre.setForeground(Color.GRAY);
-        jTextField_Apellido.setForeground(Color.GRAY);
-        jTextField_dni.setForeground(Color.GRAY);
-        jTextField_telefono.setForeground(Color.GRAY);
-        jTextField_Edad.setForeground(Color.GRAY);
+        jTextField_Nombre.setForeground(Color.darkGray);
+        jTextField_Apellido.setForeground(Color.darkGray);
+        jTextField_dni.setForeground(Color.darkGray);
+        jTextField_telefono.setForeground(Color.darkGray);
+        jTextField_Edad.setForeground(Color.darkGray);
 
         jDateChooser_fechaNacimiento.setDate(null);
 
@@ -1618,26 +1758,32 @@ public class Principal extends javax.swing.JFrame {
         String sexo;
         Date fecha = jDateChooser_fechaNacimiento.getDate();
 
-        // if controles ( controles de campos invalidos y tambien que no existan repetidos.)
-        nombre = jTextField_Nombre.getText();
-        apellido = jTextField_Apellido.getText();
-        try {
-            dni = Integer.parseInt(jTextField_dni.getText());
-            telefono = Long.parseLong(jTextField_telefono.getText());
-            edad = Integer.parseInt(jTextField_Edad.getText());
-        } catch (NumberFormatException e) {
-            jTextField_dni.setBackground(Color.red);
-        }
         if (jRadioButton_femenino.isSelected()) {
             sexo = "Femenino";
         } else {
             sexo = "Masculino";
         }
-        fNacimiento = dameFecha(fecha);
 
-        if (flag == 2) {
+        if (flag == 2) { // flag = 2, se ingresa un nuevo paciente al sistema
+            System.out.println("entre aqui");
 
-            if (ValidarCampos(fechaIngreso, nombreMedico, nombre, apellido, dni, telefono, edad, fNacimiento)) {
+            if (ValidarCampos()) {
+
+                nombre = jTextField_Nombre.getText();
+                apellido = jTextField_Apellido.getText();
+                try {
+                    dni = Integer.parseInt(jTextField_dni.getText());
+                    telefono = Long.parseLong(jTextField_telefono.getText());
+                    edad = Integer.parseInt(jTextField_Edad.getText());
+                } catch (NumberFormatException e) {
+
+                }
+                if (jRadioButton_femenino.isSelected()) {
+                    sexo = "Femenino";
+                } else {
+                    sexo = "Masculino";
+                }
+                fNacimiento = dameFecha(fecha);
 
                 // recuparar analsiis de la lista.
                 try {
@@ -1652,13 +1798,9 @@ public class Principal extends javax.swing.JFrame {
                     // Carga de los resultados pendientes.
 
                     ArrayList<Analisis> listaCodigos = ma.recuperarCodigos(modeloTablaAnalisisSelecionados, jTable_AnalisisSeleccionados);
-                    for (Analisis a : listaCodigos) {
-                        System.out.println();
-                        Resultado r = new Resultado(codigo, a.getCodigo(), a.getNombre());
-                        System.out.println(a.getCodigo());
-                        System.out.println(a.getNombre());
 
-                        mo.cargarResultado(r);
+                    for (Analisis a : listaCodigos) {
+                        mo.cargarResultado(codigo, a.getCodigo(), a.getNombre(), "");
 
                     }
 
@@ -1671,7 +1813,14 @@ public class Principal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "La Orden numero" + codigo + "ha sido cargada exitosamente");
             }
         } else {
-            if (ValidarCampos(fechaIngreso, nombreMedico, nombre, apellido, dni, telefono, edad, fNacimiento)) {
+            if (ValidarCampos()) {
+
+                nombre = jTextField_Nombre.getText();
+                try {
+                    dni = Integer.parseInt(jTextField_dni.getText());
+                } catch (NumberFormatException e) {
+
+                }
 
                 try {
                     String obraSocial = (String) jComboBox_ObraSocial.getSelectedItem();
@@ -1679,12 +1828,7 @@ public class Principal extends javax.swing.JFrame {
                     cargarTablaOrdenesPendientes();
                     ArrayList<Analisis> listaCodigos = ma.recuperarCodigos(modeloTablaAnalisisSelecionados, jTable_AnalisisSeleccionados);
                     for (Analisis a : listaCodigos) {
-                        System.out.println();
-                        Resultado r = new Resultado(codigo, a.getCodigo(), a.getNombre());
-                        System.out.println("Estoy cargando"+ a.getCodigo());
-                        System.out.println(a.getNombre());
-
-                        mo.cargarResultado(r);
+                        mo.cargarResultado(codigo, a.getCodigo(), a.getNombre(), "");
 
                     }
 
@@ -1779,38 +1923,77 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable_AnalisisSeleccionadosMouseClicked
 
     private void jTextField_NombreFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_NombreFocusGained
-        jTextField_Nombre.setText("");
+        if (jTextField_Nombre.getText().equalsIgnoreCase("ingrese el nombre")) {
+            jTextField_Nombre.setText("");
+        }
+        jTextField_Nombre.setBackground(Color.white);
+
     }//GEN-LAST:event_jTextField_NombreFocusGained
 
     private void jTextField_ApellidoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_ApellidoFocusGained
-        jTextField_Apellido.setText("");
+        if (jTextField_Apellido.getText().equalsIgnoreCase("ingrese el apellido")) {
+            jTextField_Apellido.setText("");
+        }
+        jTextField_Apellido.setBackground(Color.white);
 
     }//GEN-LAST:event_jTextField_ApellidoFocusGained
 
     private void jTextField_dniFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_dniFocusGained
-        jTextField_dni.setText("");
+        if (jTextField_dni.getText().equalsIgnoreCase("ingrese el dni")) {
+
+            jTextField_dni.setText("");
+        }
+        jTextField_dni.setBackground(Color.white);
     }//GEN-LAST:event_jTextField_dniFocusGained
 
     private void jTextField_telefonoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_telefonoFocusGained
-        jTextField_telefono.setText("");
+        if (jTextField_telefono.getText().equalsIgnoreCase("ingrese el telefono")) {
+
+            jTextField_telefono.setText("");
+        }
+        jTextField_telefono.setBackground(Color.white);
     }//GEN-LAST:event_jTextField_telefonoFocusGained
 
     private void jTextField_EdadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_EdadFocusGained
-        jTextField_Edad.setText("");
+        if (jTextField_Edad.getText().equalsIgnoreCase("ingrese la edad")) {
+
+            jTextField_Edad.setText("");
+        }
+        jTextField_Edad.setBackground(Color.white);
     }//GEN-LAST:event_jTextField_EdadFocusGained
+
+    private void jTextField_buscadorAnalisis1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_buscadorAnalisis1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_buscadorAnalisis1FocusGained
+
+    private void jTextField_buscadorAnalisis1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_buscadorAnalisis1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_buscadorAnalisis1ActionPerformed
+
+    private void jTextField_buscadorAnalisis1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_buscadorAnalisis1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_buscadorAnalisis1KeyPressed
+
+    private void jComboBox_buscador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_buscador1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_buscador1ActionPerformed
+
+    private void jTextField_NombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_NombreKeyTyped
+
+    }//GEN-LAST:event_jTextField_NombreKeyTyped
     public void desbloquear() {
-        // metodo para bloquear los campos de texto de los datos del paciente.
+        // metodo para desbloquear los campos de texto de los datos del paciente.
 
         jTextField_Nombre.setEnabled(true);
-        jTextField_Nombre.setText("ingrese el nombre del paciente...");
+        jTextField_Nombre.setText("ingrese el nombre");
         jTextField_Apellido.setEnabled(true);
-        jTextField_Apellido.setText("ingrese el apellido del paciente...");
+        jTextField_Apellido.setText("ingrese el apellido");
         jTextField_dni.setEnabled(true);
-        jTextField_dni.setText("ingrese el dni del paciente...");
+        jTextField_dni.setText("ingrese el dni");
         jTextField_Edad.setEnabled(true);
-        jTextField_Edad.setText("ingrese la edad del paciente...");
+        jTextField_Edad.setText("ingrese la edad");
         jTextField_telefono.setEnabled(true);
-        jTextField_telefono.setText("ingrese el telefono del paciente...");
+        jTextField_telefono.setText("ingrese el telefono");
         jDateChooser_fechaNacimiento.setEnabled(true);
         jRadioButton_femenino.setEnabled(true);
         jRadioButton_masculino.setEnabled(true);
@@ -1877,6 +2060,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel datosAnalisis_CargarOrden5;
     private javax.swing.JLabel datosAnalisis_CargarOrden6;
     private javax.swing.JLabel datosAnalisis_CargarOrden7;
+    private javax.swing.JLabel datosAnalisis_CargarOrden8;
+    private javax.swing.JLabel datosAnalisis_CargarOrden9;
     private javax.swing.JLabel datosPaciente_CargarOrden;
     private javax.swing.JLabel fecha_CargarOrden;
     private javax.swing.JLabel fecha_CargarOrden1;
@@ -1895,6 +2080,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jButton_ObraSocial_CargarOrden;
     private javax.swing.JComboBox<String> jComboBox_ObraSocial;
     private javax.swing.JComboBox<String> jComboBox_buscador;
+    private javax.swing.JComboBox<String> jComboBox_buscador1;
     private com.toedter.calendar.JDateChooser jDateChooser_fechaNacimiento;
     private com.toedter.calendar.JDateChooser jDateChooserfechaIngreso;
     private javax.swing.JDialog jDialog_ListadoPacientes;
@@ -1917,6 +2103,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRadioButton_masculino;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1939,6 +2126,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTable jTable_Analisis;
     private javax.swing.JTable jTable_AnalisisSeleccionados;
     private javax.swing.JTable jTable_ListadoPacientes;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea1_valoresDeReferencia;
     private javax.swing.JTextArea jTextArea_cargarOrden;
     private javax.swing.JTextField jTextFieldResultadosBuscarOrden;
@@ -1947,6 +2135,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_Medico_CargarOrden;
     private javax.swing.JTextField jTextField_Nombre;
     private javax.swing.JTextField jTextField_buscadorAnalisis;
+    private javax.swing.JTextField jTextField_buscadorAnalisis1;
     private javax.swing.JTextField jTextField_dni;
     private javax.swing.JTextField jTextField_nombreStock;
     private javax.swing.JTextField jTextField_telefono;

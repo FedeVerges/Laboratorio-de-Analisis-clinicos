@@ -19,6 +19,9 @@ public class Obra_Social {
         this.telefono = telefono;
         this.precio_unidad_bioquimica = precio_unidad_bioquimica;
     }
+    public Obra_Social(){
+        
+    }
 
     public String getNombre() {
         return nombre;

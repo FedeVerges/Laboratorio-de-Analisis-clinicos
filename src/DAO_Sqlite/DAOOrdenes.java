@@ -20,26 +20,48 @@ import javax.swing.JOptionPane;
  *
  * @author fede_
  */
-public class DAOOrdenes {
-    public static ArrayList<Orden> readOrden(){
+public class DAOOrdenes implements DAOOrden {
+
+    @Override
+    public ArrayList<Orden> readOrden() {
         return DataSrc.readOrden();
     }
-    
-    public static Orden createOrden(){
-        return new Orden("","",0,"","");
+
+    @Override
+    public ArrayList<Orden> readOrdenesTerminadas() {
+        return DataSrc.readOrdenesTerminadas();
+    }
+
+    @Override
+    public Orden createOrden() {
+        return new Orden("", "", 0, "", "");
 
     }
-    
-    public static void guardarOrden(Orden orden){
+
+    @Override
+    public void guardarOrden(Orden orden) {
         DataSrc.insertOrden(orden);
     }
-    
-    public static void modificarOrden(Orden orden){
-       DataSrc.updateOrden(orden);
+
+    @Override
+    public void modificarOrden(Orden orden) {
+        DataSrc.updateOrden(orden);
     }
-    
-    public static void modificarOrdenResultado(Orden orden){
+
+    @Override
+    public void modificarOrdenResultado(Orden orden) {
         DataSrc.updateOrdenResultado(orden);
     }
-    
+
+    @Override
+    public void deteleOrden(Orden orden) {
+        DataSrc.deleteOrden(orden);
+    }
+
+    @Override
+    public int retornarCodigo() {
+        return DataSrc.retornarCodigo();
+        
+    }
+
 }

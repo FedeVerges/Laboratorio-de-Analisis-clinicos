@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package Clases;
+
+import java.util.ArrayList;
+
 /**
  *
  * @author fede_
@@ -17,7 +20,7 @@ public class Paciente {
     private String fechaNacimiento;
     private Integer edad;
     private String sexo;
-    private Orden orden;
+    private ArrayList<Obra_Social> obraSocial;
 
     public Paciente(String nombre, String apellido, int dni, Long telefono, String fechaNacimiento, int edad, String sexo) {
         this.nombre = nombre;
@@ -27,15 +30,14 @@ public class Paciente {
         this.fechaNacimiento = fechaNacimiento;
         this.edad = edad;
         this.sexo = sexo;
+    }
+
+    public Paciente() {
 
     }
 
     public int getDni() {
-        return  dni;
-    }
-
-    public Orden getOrden() {
-        return orden;
+        return dni;
     }
 
     public String getNombre() {
@@ -60,6 +62,10 @@ public class Paciente {
 
     public String getSexo() {
         return sexo;
+    }
+
+    public ArrayList<Obra_Social> getObraSocial() {
+        return obraSocial;
     }
 
     public void setNombre(String nombre) {
@@ -90,8 +96,11 @@ public class Paciente {
         this.dni = dni;
     }
 
-    public void setOrden(Orden orden) {
-        this.orden = orden;
+    public void setObraSocial(String obraSocial) {
+        this.obraSocial = new ArrayList<>();
+        Obra_Social o = new Obra_Social();
+        o.setNombre(obraSocial);
+        this.obraSocial.add(o);
     }
 
 }
