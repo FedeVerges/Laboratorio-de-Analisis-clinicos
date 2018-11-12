@@ -6,6 +6,7 @@
 package DAO_Sqlite;
 
 import Base_de_Datos.ConnectionMethods;
+import Clases.Bioquimico;
 import Clases.Obra_Social;
 import Clases.Orden;
 import Clases.Paciente;
@@ -26,15 +27,18 @@ public class DataSrc {
     // Ordenes //
     public static Orden readOrden(int codigoORden) {
         Statement statement = null;
-        String query = "Select * FROM ORDEN WHERE OR_NUMERO =" + codigoORden;
+        String query = "Select * FROM ORDEN,PACIENTE WHERE OR_NUMERO =" + codigoORden+ " AND ORDEN.P_DNI=PACIENTE.P_DNI";
         Orden a;
-
+        Bioquimico b = new Bioquimico();
         try {
             statement = ConnectionMethods.getConection().createStatement();
             ResultSet resultSet = statement.executeQuery(query);
             a = new Orden((resultSet.getString("OR_FECHA")), (resultSet.getString("OR_MEDICO")), (resultSet.getInt("P_DNI")),(resultSet.getString("P_NOMBRE")),(resultSet.getString("OBRA_SOCIAL")));
+            a.setPaciente(new Paciente((resultSet.getString("P_NOMBRE")), (resultSet.getString("P_APELLIDO")), (resultSet.getInt("P_DNI")), (resultSet.getLong("P_TELEFONO")), (resultSet.getString("P_FECHA_NACIMIENTO")), (resultSet.getInt("P_EDAD")), (resultSet.getString("P_SEXO"))));
             a.setNumero((resultSet.getInt("OR_NUMERO")));
             a.setEstado(resultSet.getString("ESTADO"));
+            b.setNombre((resultSet.getString("OR_BIOQUIMICO")));
+            a.setBioquimico(b);
             statement.close();
 
         } catch (SQLException e) {
@@ -214,11 +218,12 @@ public class DataSrc {
     }
 
     // Resultados // 
+    
     public static ArrayList<Resultado> readResultado(int codigoOrden) {
         Statement statement = null;
         String query = "SELECT * FROM RESULTADOS WHERE RESULTADOS.ORDEN_NUMERO = " + codigoOrden;
 
-        ArrayList<Resultado> datosResultados = new ArrayList<Resultado>();
+        ArrayList<Resultado> datosResultados = new ArrayList<>();
         Resultado a;
         try {
             statement = ConnectionMethods.getConection().createStatement();
@@ -227,11 +232,9 @@ public class DataSrc {
             while (resultSet.next()) {
 
                 a = new Resultado((resultSet.getInt("ORDEN_NUMERO")), (resultSet.getInt("CODIGO_ANALISIS")), (resultSet.getString("NOMBRE_ANALISIS")));
-                System.out.println((resultSet.getInt("ORDEN_NUMERO")));
+                a.setValorTomado(resultSet.getString("RES_VALOR"));
                 datosResultados.add(a);
-                System.out.println("El codigo de la orden es" + a.getCodigoOrden());
-                System.out.println("El codigo del analisis es:" + a.getCodigoAnalisis());
-                System.out.println("El nombre del analisis es " + a.getNombreAnalisis());
+              
             }
             resultSet.close();
             statement.close();
@@ -306,6 +309,7 @@ public class DataSrc {
     }
 
     // Pacientes // 
+    
     public static ArrayList<Paciente> readPaciente() {
         Statement statement = null;
         String query = "SELECT * FROM PACIENTE";

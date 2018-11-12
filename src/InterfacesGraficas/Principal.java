@@ -13,6 +13,11 @@ import Manager.ManagerAnalisis;
 import Manager.ManagerPaciente;
 import Manager.Manager_Ordenes;
 import java.awt.Color;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -105,7 +110,8 @@ public class Principal extends javax.swing.JFrame {
         cargarTablaOrdenesTerminadas();
         cargarTablaListadoPacientes();
         bloquear();
-
+        
+        jTabbedPane_menuPestañas.setEnabledAt(3,false);
     }
 
     // Metodo para cargar la tabla de los analisis que pueden ser seleccionados.
@@ -267,6 +273,13 @@ public class Principal extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jDialog_Login = new javax.swing.JDialog();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jTextField_Usuario = new javax.swing.JTextField();
+        jTextField_contraseña = new javax.swing.JTextField();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jTabbedPane_menuPestañas = new javax.swing.JTabbedPane();
         jPanel_CargarOrden = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -336,9 +349,9 @@ public class Principal extends javax.swing.JFrame {
         datosAnalisis_CargarOrden7 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTable2_TablaOrdenesTerminadas = new javax.swing.JTable();
-        jButton2CargarResultado1 = new javax.swing.JButton();
+        jButton_imprimirResultado = new javax.swing.JButton();
         jScrollPane11 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextArea_VistaPrevia = new javax.swing.JTextArea();
         datosAnalisis_CargarOrden8 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jButton_Femenino = new javax.swing.JButton();
@@ -439,12 +452,10 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jTable_Analisis.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTable_Analisis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo", "Nombre", "Indicaciones", "Unidades Bioquimicas", "Consentimiento", "Descartables", "Valores Referencia"
@@ -467,33 +478,40 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable_Analisis);
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setFont(new java.awt.Font("Microsoft New Tai Lue", 1, 18)); // NOI18N
+        jLabel2.setText("Analisis");
 
+        jTextField1.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
         jTextField1.setText("jTextField1");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre" }));
 
-        jButton2.setText("jButton2");
+        jButton2.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
+        jButton2.setText("Nuevo");
 
-        jButton4.setText("jButton4");
+        jButton4.setBackground(new java.awt.Color(255, 102, 102));
+        jButton4.setFont(new java.awt.Font("Microsoft New Tai Lue", 0, 14)); // NOI18N
+        jButton4.setText("Eliminar");
 
         javax.swing.GroupLayout jDialog_ListadoAnalisisLayout = new javax.swing.GroupLayout(jDialog_ListadoAnalisis.getContentPane());
         jDialog_ListadoAnalisis.getContentPane().setLayout(jDialog_ListadoAnalisisLayout);
         jDialog_ListadoAnalisisLayout.setHorizontalGroup(
             jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog_ListadoAnalisisLayout.createSequentialGroup()
-                .addGroup(jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDialog_ListadoAnalisisLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 14, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jDialog_ListadoAnalisisLayout.setVerticalGroup(
@@ -501,50 +519,119 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog_ListadoAnalisisLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jDialog_ListadoAnalisisLayout.createSequentialGroup()
                         .addGroup(jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jTextField1)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(9, 9, 9)))
-                .addGap(18, 18, 18)
+                        .addGap(15, 15, 15))
+                    .addGroup(jDialog_ListadoAnalisisLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)))
                 .addGroup(jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jDialog_ListadoAnalisisLayout.createSequentialGroup()
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(29, 29, 29)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jDialog_Login.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jLabel4.setFont(new java.awt.Font("Microsoft YaHei", 0, 18)); // NOI18N
+        jLabel4.setText("Usuario");
+
+        jLabel5.setFont(new java.awt.Font("Microsoft YaHei", 0, 18)); // NOI18N
+        jLabel5.setText("Contraseña");
+
+        jTextField_Usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_UsuarioActionPerformed(evt);
+            }
+        });
+
+        jTextField_contraseña.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_contraseñaActionPerformed(evt);
+            }
+        });
+
+        jButton6.setBackground(new java.awt.Color(102, 255, 102));
+        jButton6.setFont(new java.awt.Font("Microsoft YaHei", 0, 18)); // NOI18N
+        jButton6.setText("Aceptar");
+
+        jButton7.setBackground(new java.awt.Color(255, 102, 102));
+        jButton7.setFont(new java.awt.Font("Microsoft YaHei", 0, 18)); // NOI18N
+        jButton7.setText("Cancelar");
+
+        javax.swing.GroupLayout jDialog_LoginLayout = new javax.swing.GroupLayout(jDialog_Login.getContentPane());
+        jDialog_Login.getContentPane().setLayout(jDialog_LoginLayout);
+        jDialog_LoginLayout.setHorizontalGroup(
+            jDialog_LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_LoginLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog_LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jDialog_LoginLayout.createSequentialGroup()
+                        .addComponent(jButton6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton7))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField_Usuario)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
+        );
+        jDialog_LoginLayout.setVerticalGroup(
+            jDialog_LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_LoginLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField_Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField_contraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jDialog_LoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6)
+                    .addComponent(jButton7))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Laboratorio de Analisis Bioquimicos");
+        setAutoRequestFocus(false);
         setBackground(new java.awt.Color(0, 0, 204));
         setForeground(new java.awt.Color(204, 204, 204));
-        setLocation(new java.awt.Point(150, 0));
+        setLocation(new java.awt.Point(50, 0));
+        setName("Principal"); // NOI18N
 
         jTabbedPane_menuPestañas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 3));
-        jTabbedPane_menuPestañas.setFont(new java.awt.Font("Ebrima", 2, 14)); // NOI18N
+        jTabbedPane_menuPestañas.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 2, 14)); // NOI18N
         jTabbedPane_menuPestañas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTabbedPane_menuPestañasMouseClicked(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 16)); // NOI18N
         jLabel1.setText("Ingrese los datos de la Orden");
 
-        fecha_CargarOrden.setFont(new java.awt.Font("Ebrima", 2, 14)); // NOI18N
+        fecha_CargarOrden.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         fecha_CargarOrden.setText("Fecha");
 
-        Medico_cargarOrden.setFont(new java.awt.Font("Ebrima", 2, 14)); // NOI18N
+        Medico_cargarOrden.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         Medico_cargarOrden.setText("Medico");
 
-        jTextField_Medico_CargarOrden.setText("nombremedico");
+        jTextField_Medico_CargarOrden.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
+        jTextField_Medico_CargarOrden.setText("ingrese el nombre del medico");
 
-        datosPaciente_CargarOrden.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        datosPaciente_CargarOrden.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 16)); // NOI18N
         datosPaciente_CargarOrden.setText("Datos Paciente");
 
         jButton_ListadoPaciente_CargarOrden.setBackground(java.awt.Color.darkGray);
-        jButton_ListadoPaciente_CargarOrden.setFont(new java.awt.Font("Ebrima", 2, 12)); // NOI18N
+        jButton_ListadoPaciente_CargarOrden.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jButton_ListadoPaciente_CargarOrden.setText("Pacientes");
         jButton_ListadoPaciente_CargarOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -552,6 +639,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jTextField_Nombre.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_Nombre.setText("ingrese el nombre");
         jTextField_Nombre.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -564,6 +652,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jTextField_Apellido.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_Apellido.setText("ingrese el apellido");
         jTextField_Apellido.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -576,6 +665,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jTextField_dni.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_dni.setText("ingrese el dni");
         jTextField_dni.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -588,6 +678,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jTextField_telefono.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_telefono.setText("ingrese el telefono");
         jTextField_telefono.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -595,17 +686,17 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        fecha_CargarOrden1.setFont(new java.awt.Font("Ebrima", 2, 14)); // NOI18N
+        fecha_CargarOrden1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         fecha_CargarOrden1.setText("Fecha de Nacimieto");
 
-        fecha_CargarOrden2.setFont(new java.awt.Font("Ebrima", 2, 14)); // NOI18N
+        fecha_CargarOrden2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         fecha_CargarOrden2.setText("Sexo");
 
-        datosAnalisis_CargarOrden1.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        datosAnalisis_CargarOrden1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 16)); // NOI18N
         datosAnalisis_CargarOrden1.setText("Análisis Seleccionados");
 
         buttonGroup_sexo.add(jRadioButton_masculino);
-        jRadioButton_masculino.setFont(new java.awt.Font("Ebrima", 0, 11)); // NOI18N
+        jRadioButton_masculino.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jRadioButton_masculino.setText("Masculino");
         jRadioButton_masculino.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -614,11 +705,11 @@ public class Principal extends javax.swing.JFrame {
         });
 
         buttonGroup_sexo.add(jRadioButton_femenino);
-        jRadioButton_femenino.setFont(new java.awt.Font("Ebrima", 0, 11)); // NOI18N
+        jRadioButton_femenino.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jRadioButton_femenino.setText("Femenino");
 
         jButton_CargarOrden.setBackground(java.awt.Color.darkGray);
-        jButton_CargarOrden.setFont(new java.awt.Font("Ebrima", 2, 14)); // NOI18N
+        jButton_CargarOrden.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jButton_CargarOrden.setText("Cargar Orden");
         jButton_CargarOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -630,6 +721,7 @@ public class Principal extends javax.swing.JFrame {
         jTextArea_cargarOrden.setRows(5);
         jScrollPane4.setViewportView(jTextArea_cargarOrden);
 
+        jTextField_Edad.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_Edad.setText("ingrese la edad");
         jTextField_Edad.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -637,9 +729,10 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
-        datosAnalisis_CargarOrden5.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        datosAnalisis_CargarOrden5.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 16)); // NOI18N
         datosAnalisis_CargarOrden5.setText("Listado Análisis");
 
+        jButton1CargarLista.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jButton1CargarLista.setText("Cargar Analisis ");
         jButton1CargarLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -647,6 +740,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jTableAnalasisParaSeleccionar.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jTableAnalasisParaSeleccionar.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -672,9 +766,10 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableAnalasisParaSeleccionar);
 
-        jButton_ObraSocial_CargarOrden.setFont(new java.awt.Font("Ebrima", 2, 14)); // NOI18N
+        jButton_ObraSocial_CargarOrden.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jButton_ObraSocial_CargarOrden.setText("Obra Social");
 
+        jComboBox_ObraSocial.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jComboBox_ObraSocial.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Swiss Medical", "Femesa", "Osde", "Sancor Salud", "Particular" }));
         jComboBox_ObraSocial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -682,6 +777,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jTable_AnalisisSeleccionados.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jTable_AnalisisSeleccionados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -706,7 +802,7 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane9.setViewportView(jTable_AnalisisSeleccionados);
 
         jButton_ListadoPaciente_CargarOrden1.setBackground(java.awt.Color.darkGray);
-        jButton_ListadoPaciente_CargarOrden1.setFont(new java.awt.Font("Ebrima", 2, 12)); // NOI18N
+        jButton_ListadoPaciente_CargarOrden1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jButton_ListadoPaciente_CargarOrden1.setText("Cargar Nuevo");
         jButton_ListadoPaciente_CargarOrden1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -714,6 +810,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jTextField_buscadorAnalisis.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_buscadorAnalisis.setText("Ingrese aqui lo que desea buscar...");
         jTextField_buscadorAnalisis.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -731,6 +828,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jComboBox_buscador.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jComboBox_buscador.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Nombre", "Codigo" }));
         jComboBox_buscador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -739,7 +837,7 @@ public class Principal extends javax.swing.JFrame {
         });
 
         jButton_Analisis_CargarOrden1.setBackground(java.awt.Color.darkGray);
-        jButton_Analisis_CargarOrden1.setFont(new java.awt.Font("Ebrima", 2, 14)); // NOI18N
+        jButton_Analisis_CargarOrden1.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jButton_Analisis_CargarOrden1.setText("Análisis");
         jButton_Analisis_CargarOrden1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -767,17 +865,17 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jTextField_Medico_CargarOrden)
                             .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jDateChooserfechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jDateChooserfechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jTextField_telefono)
                     .addComponent(jTextField_Edad)
                     .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
                         .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton_ObraSocial_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(fecha_CargarOrden1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(109, 109, 109)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser_fechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox_ObraSocial, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jDateChooser_fechaNacimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox_ObraSocial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
                         .addComponent(fecha_CargarOrden2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -785,15 +883,14 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jRadioButton_femenino))
                     .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                                .addComponent(datosPaciente_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton_ListadoPaciente_CargarOrden1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton_ListadoPaciente_CargarOrden))
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 65, Short.MAX_VALUE))
+                    .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
+                        .addComponent(datosPaciente_CargarOrden, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_ListadoPaciente_CargarOrden1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton_ListadoPaciente_CargarOrden)))
                 .addGap(17, 17, 17)
                 .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
@@ -814,14 +911,14 @@ public class Principal extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButton1CargarLista)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton_Analisis_CargarOrden1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jButton_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jButton_Analisis_CargarOrden1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE))
                                     .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
                                         .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 555, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CargarOrdenLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jButton_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap())))
         );
         jPanel_CargarOrdenLayout.setVerticalGroup(
@@ -843,7 +940,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(jTextField_Medico_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(datosPaciente_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton_ListadoPaciente_CargarOrden1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -900,6 +997,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel2_cargarResultados.setBackground(new java.awt.Color(102, 102, 102));
 
         jTable2_TablaOrdenesPendientes.setBackground(new java.awt.Color(204, 204, 204));
+        jTable2_TablaOrdenesPendientes.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTable2_TablaOrdenesPendientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -935,19 +1033,21 @@ public class Principal extends javax.swing.JFrame {
 
         jTextArea1_valoresDeReferencia.setEditable(false);
         jTextArea1_valoresDeReferencia.setColumns(10);
+        jTextArea1_valoresDeReferencia.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextArea1_valoresDeReferencia.setRows(5);
         jTextArea1_valoresDeReferencia.setAutoscrolls(false);
         jScrollPane5.setViewportView(jTextArea1_valoresDeReferencia);
 
-        datosAnalisis_CargarOrden2.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        datosAnalisis_CargarOrden2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 16)); // NOI18N
         datosAnalisis_CargarOrden2.setText("Seleccione una orden sin terminar de la lista:");
 
-        datosAnalisis_CargarOrden3.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        datosAnalisis_CargarOrden3.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 16)); // NOI18N
         datosAnalisis_CargarOrden3.setText("Valores de referencia:");
 
-        datosAnalisis_CargarOrden4.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        datosAnalisis_CargarOrden4.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 16)); // NOI18N
         datosAnalisis_CargarOrden4.setText("Cargue los valores :");
 
+        jTable4_cargarValoresAnalisis.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTable4_cargarValoresAnalisis.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -978,6 +1078,7 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(jTable4_cargarValoresAnalisis);
 
+        jButton2CargarResultado.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jButton2CargarResultado.setText("Cargar resultado");
         jButton2CargarResultado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -985,6 +1086,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jButton3.setText("Limpiar tabla");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -992,6 +1094,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jTextFieldResultadosBuscarOrden.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextFieldResultadosBuscarOrden.setForeground(new java.awt.Color(0, 0, 51));
         jTextFieldResultadosBuscarOrden.setText("Ingrese el nombre del paciente a buscar:");
         jTextFieldResultadosBuscarOrden.setToolTipText("Ingrese el nombre del paciente a buscar");
@@ -1032,7 +1135,7 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jButton2CargarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 909, Short.MAX_VALUE)
                     .addComponent(jScrollPane6)
                     .addGroup(jPanel2_cargarResultadosLayout.createSequentialGroup()
                         .addComponent(datosAnalisis_CargarOrden2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1064,16 +1167,17 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
         jTextFieldResultadosBuscarOrden.getAccessibleContext().setAccessibleName("");
 
         jTabbedPane_menuPestañas.addTab("Cargar Resultados", jPanel2_cargarResultados);
 
-        datosAnalisis_CargarOrden6.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        datosAnalisis_CargarOrden6.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 16)); // NOI18N
         datosAnalisis_CargarOrden6.setText("Listado de ordenes pendientes:");
 
+        jTable3_TablaPestanaOrdenesPendientes.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTable3_TablaPestanaOrdenesPendientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1112,11 +1216,11 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(datosAnalisis_CargarOrden6, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(779, Short.MAX_VALUE))
+                .addContainerGap(839, Short.MAX_VALUE))
             .addGroup(jPanel2ListarOrdenesPendientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 1159, Short.MAX_VALUE)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 1219, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel2ListarOrdenesPendientesLayout.setVerticalGroup(
@@ -1124,12 +1228,12 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(datosAnalisis_CargarOrden6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(473, Short.MAX_VALUE))
+                .addContainerGap(474, Short.MAX_VALUE))
             .addGroup(jPanel2ListarOrdenesPendientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                     .addGap(60, 60, 60)
                     .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(72, Short.MAX_VALUE)))
+                    .addContainerGap(73, Short.MAX_VALUE)))
         );
 
         jTabbedPane_menuPestañas.addTab("Listar Ordenes Pendientes", jPanel2ListarOrdenesPendientes);
@@ -1180,7 +1284,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_stockLayout.createSequentialGroup()
-                        .addComponent(jLabel_nombreStock, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                        .addComponent(jLabel_nombreStock, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                         .addGap(268, 268, 268))
                     .addGroup(jPanel_stockLayout.createSequentialGroup()
                         .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1223,14 +1327,15 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton_ActualzarStock, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         jTabbedPane_menuPestañas.addTab("Stock", jPanel_stock);
 
-        datosAnalisis_CargarOrden7.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        datosAnalisis_CargarOrden7.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 16)); // NOI18N
         datosAnalisis_CargarOrden7.setText("Listado de ordenes terminadas:");
 
+        jTable2_TablaOrdenesTerminadas.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jTable2_TablaOrdenesTerminadas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -1262,18 +1367,20 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane10.setViewportView(jTable2_TablaOrdenesTerminadas);
 
-        jButton2CargarResultado1.setText("Imprimir Resultado");
-        jButton2CargarResultado1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_imprimirResultado.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
+        jButton_imprimirResultado.setText("Imprimir Resultado");
+        jButton_imprimirResultado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2CargarResultado1ActionPerformed(evt);
+                jButton_imprimirResultadoActionPerformed(evt);
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane11.setViewportView(jTextArea1);
+        jTextArea_VistaPrevia.setColumns(20);
+        jTextArea_VistaPrevia.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
+        jTextArea_VistaPrevia.setRows(5);
+        jScrollPane11.setViewportView(jTextArea_VistaPrevia);
 
-        datosAnalisis_CargarOrden8.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
+        datosAnalisis_CargarOrden8.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 1, 16)); // NOI18N
         datosAnalisis_CargarOrden8.setText("Vista Previa");
 
         javax.swing.GroupLayout jPanel3ImprimirResultadosLayout = new javax.swing.GroupLayout(jPanel3ImprimirResultados);
@@ -1289,13 +1396,13 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(datosAnalisis_CargarOrden7, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
                             .addGroup(jPanel3ImprimirResultadosLayout.createSequentialGroup()
                                 .addComponent(datosAnalisis_CargarOrden8, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3ImprimirResultadosLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2CargarResultado1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton_imprimirResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3ImprimirResultadosLayout.setVerticalGroup(
@@ -1310,28 +1417,33 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jScrollPane11)
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2CargarResultado1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addComponent(jButton_imprimirResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jTabbedPane_menuPestañas.addTab("Imprimir Resultados", jPanel3ImprimirResultados);
 
         jPanel4.setLayout(new java.awt.BorderLayout());
 
+        jButton_Femenino.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jButton_Femenino.setText("Iniciar Sesion");
+        jButton_Femenino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_FemeninoActionPerformed(evt);
+            }
+        });
         jPanel4.add(jButton_Femenino, java.awt.BorderLayout.LINE_END);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jTabbedPane_menuPestañas)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1741,23 +1853,61 @@ public class Principal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldResultadosBuscarOrdenActionPerformed
 
-    private void jButton2CargarResultado1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2CargarResultado1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2CargarResultado1ActionPerformed
+    private void jButton_imprimirResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_imprimirResultadoActionPerformed
+        String texto = jTextArea_VistaPrevia.getText();
+        Integer codigoOrden = Integer.parseInt(String.valueOf(modeloTablaOrdenesTerminadas.getValueAt(jTable2_TablaOrdenesTerminadas.getSelectedRow(), 0)));
+        generarInforme(texto,codigoOrden);
 
+    }//GEN-LAST:event_jButton_imprimirResultadoActionPerformed
+    /**
+     * Este metodo genera el archivo de texto que contiene el la orden que va a ser impresa por el usuario.
+     * 
+     * @param informe
+     * @param codigo
+     */
+    public void generarInforme(String informe, int codigo){
+        File archivo = new File("ArchivosOrdenes/orden n° " +codigo+ ".txt");
+        try{
+            FileWriter w = new FileWriter(archivo);
+            BufferedWriter bw = new BufferedWriter (w);
+            PrintWriter wr = new PrintWriter(bw);
+            wr.write(informe);
+            wr.close();
+            bw.close();
+            
+        }catch(IOException e){
+            JOptionPane.showMessageDialog(null, "Error al escribir el fichero");
+        }
+        JOptionPane.showMessageDialog(null, "El informe se ha generado exitosamente.");
+        
+        
+    }
     private void jTable2_TablaOrdenesTerminadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2_TablaOrdenesTerminadasMouseClicked
-        Integer codigoOrden = Integer.parseInt(String.valueOf(modeloTablaOrdenesPendientes.getValueAt(jTable2_TablaOrdenesTerminadas.getSelectedRow(), 0)));
+        Integer codigoOrden = Integer.parseInt(String.valueOf(modeloTablaOrdenesTerminadas.getValueAt(jTable2_TablaOrdenesTerminadas.getSelectedRow(), 0)));
         Manager_Ordenes mo = new Manager_Ordenes();
         ArrayList<Resultado> lista = mo.recuperarFilasResultados(codigoOrden);
-        String impresion = "Orden n°:"+ codigoOrden+"\n";
-        impresion.concat("Nombre: " );
+        Orden o = mo.recuperarOrden(codigoOrden);
+        String impresion = "Orden n°:"+ codigoOrden+"\n"
+                           +"Nombre y Apellido: "+ o.getPaciente().getNombre()+" "+ o.getPaciente().getApellido()+"\n"
+                           +"DNI:"+ o.getPaciente().getDni()+"\n"+"Sexo :"+ o.getPaciente().getSexo()+"\n"+"Edad: "+ o.getPaciente().getEdad()+"\n"+
+                            "Bioquimico: "+o.getBioquimico().getNombre()+"\n"+"Medico: "+o.getMedico()+"\n\n";
+        
+        String analisis = "Analisis: \n";
+        String todosAnalisis = null;
+        String ultimo;
+        
         for (Resultado r: lista){
+            System.out.println(r.getNombreAnalisis());
             if (r.getCodigoOrden() == codigoOrden){
                 System.out.println("tengo el codigo " + r.getCodigoAnalisis());
-                
+                analisis+=(r.getNombreAnalisis() +":"+"  "+r.getValorTomado()+ "\n");
             }
         }
-
+        ultimo = impresion.concat(analisis);
+        System.out.println(ultimo);
+        jTextArea_VistaPrevia.setText(ultimo);
+        
+        
     }//GEN-LAST:event_jTable2_TablaOrdenesTerminadasMouseClicked
 
     private void jButton_ListadoPaciente_CargarOrden1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListadoPaciente_CargarOrden1ActionPerformed
@@ -2027,6 +2177,22 @@ public class Principal extends javax.swing.JFrame {
     private void jTextField_NombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_NombreKeyTyped
 
     }//GEN-LAST:event_jTextField_NombreKeyTyped
+
+    private void jTextField_UsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_UsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_UsuarioActionPerformed
+
+    private void jTextField_contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_contraseñaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_contraseñaActionPerformed
+
+    private void jButton_FemeninoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_FemeninoActionPerformed
+        jDialog_Login.setVisible(true);
+        jDialog_Login.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        jDialog_Login.setAlwaysOnTop(true);
+        jDialog_Login.setSize(350,300);
+        
+    }//GEN-LAST:event_jButton_FemeninoActionPerformed
     public void desbloquear() {
         // metodo para desbloquear los campos de texto de los datos del paciente.
 
@@ -2116,10 +2282,11 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton1CargarLista;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton2CargarResultado;
-    private javax.swing.JButton jButton2CargarResultado1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton_ActualzarStock;
     private javax.swing.JButton jButton_Analisis_CargarOrden1;
     private javax.swing.JButton jButton_CargarOrden;
@@ -2128,6 +2295,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton jButton_ListadoPaciente_CargarOrden;
     private javax.swing.JButton jButton_ListadoPaciente_CargarOrden1;
     private javax.swing.JLabel jButton_ObraSocial_CargarOrden;
+    private javax.swing.JButton jButton_imprimirResultado;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox_ObraSocial;
     private javax.swing.JComboBox<String> jComboBox_buscador;
@@ -2136,9 +2304,12 @@ public class Principal extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser jDateChooserfechaIngreso;
     private javax.swing.JDialog jDialog_ListadoAnalisis;
     private javax.swing.JDialog jDialog_ListadoPacientes;
+    private javax.swing.JDialog jDialog_Login;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel_cantidadActual;
     private javax.swing.JLabel jLabel_cantidadMinima;
     private javax.swing.JLabel jLabel_nombreStock;
@@ -2176,8 +2347,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTable jTable_Analisis;
     private javax.swing.JTable jTable_AnalisisSeleccionados;
     private javax.swing.JTable jTable_ListadoPacientes;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea1_valoresDeReferencia;
+    private javax.swing.JTextArea jTextArea_VistaPrevia;
     private javax.swing.JTextArea jTextArea_cargarOrden;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldResultadosBuscarOrden;
@@ -2185,8 +2356,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_Edad;
     private javax.swing.JTextField jTextField_Medico_CargarOrden;
     private javax.swing.JTextField jTextField_Nombre;
+    private javax.swing.JTextField jTextField_Usuario;
     private javax.swing.JTextField jTextField_buscadorAnalisis;
     private javax.swing.JTextField jTextField_buscadorPacientes;
+    private javax.swing.JTextField jTextField_contraseña;
     private javax.swing.JTextField jTextField_dni;
     private javax.swing.JTextField jTextField_nombreStock;
     private javax.swing.JTextField jTextField_telefono;
