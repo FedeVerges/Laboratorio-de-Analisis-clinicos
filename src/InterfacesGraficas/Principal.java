@@ -55,7 +55,6 @@ public class Principal extends javax.swing.JFrame {
      */
     public Principal() {
         //Tabla emergente del boton
-        modeloTablaAnalisis = new DefaultTableModel(null, ma.recuperarColumnas());
         //CONTROLAR ESTO!!!!!
 
         // creo datos locales de analisis
@@ -90,8 +89,8 @@ public class Principal extends javax.swing.JFrame {
         modeloTablaAnalisisParaSeleccionar = (DefaultTableModel) jTableAnalasisParaSeleccionar.getModel();
         jTableAnalasisParaSeleccionar.setModel(modeloTablaAnalisisParaSeleccionar);
         // tabla de analisis.
-        jTable_Analisis.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
-        jTable2_TablaOrdenesPendientes.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        modeloTablaAnalisis = (DefaultTableModel) jTable_Analisis.getModel();
+        jTable_Analisis.setModel(modeloTablaAnalisis);
 
         // tabla Listado de Pacientes
         modeloTablaListadoPacientes = (DefaultTableModel) jTable_ListadoPacientes.getModel();
@@ -251,18 +250,23 @@ public class Principal extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup_sexo = new javax.swing.ButtonGroup();
-        jFrame_ListadoAnalisis = new javax.swing.JFrame();
-        jPanel1 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable_Analisis = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jDialog_ListadoPacientes = new javax.swing.JDialog();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTable_ListadoPacientes = new javax.swing.JTable();
         datosAnalisis_CargarOrden9 = new javax.swing.JLabel();
-        jTextField_buscadorAnalisis1 = new javax.swing.JTextField();
+        jTextField_buscadorPacientes = new javax.swing.JTextField();
         jComboBox_buscador1 = new javax.swing.JComboBox<>();
+        jButton_EliminarPaciente = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jDialog_ListadoAnalisis = new javax.swing.JDialog();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable_Analisis = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton2 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
         jTabbedPane_menuPestañas = new javax.swing.JTabbedPane();
         jPanel_CargarOrden = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -298,6 +302,7 @@ public class Principal extends javax.swing.JFrame {
         jComboBox_buscador = new javax.swing.JComboBox<>();
         jDateChooserfechaIngreso = new com.toedter.calendar.JDateChooser();
         jDateChooser_fechaNacimiento = new com.toedter.calendar.JDateChooser();
+        jButton_Analisis_CargarOrden1 = new javax.swing.JButton();
         jPanel2_cargarResultados = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable2_TablaOrdenesPendientes = new javax.swing.JTable();
@@ -337,47 +342,6 @@ public class Principal extends javax.swing.JFrame {
         datosAnalisis_CargarOrden8 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jButton_Femenino = new javax.swing.JButton();
-        jButton_Analisis_CargarOrden1 = new javax.swing.JButton();
-
-        jFrame_ListadoAnalisis.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jFrame_ListadoAnalisis.setTitle("Listado de Analisis");
-        jFrame_ListadoAnalisis.setAlwaysOnTop(true);
-        jFrame_ListadoAnalisis.setFocusableWindowState(false);
-
-        jTable_Analisis.setBackground(new java.awt.Color(204, 204, 204));
-        jTable_Analisis.setModel(modeloTablaAnalisis);
-        jTable_Analisis.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTable_Analisis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable_AnalisisMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jTable_Analisis);
-
-        jLabel2.setFont(new java.awt.Font("Microsoft JhengHei", 0, 18)); // NOI18N
-        jLabel2.setText("Analisis");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(563, 595, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(4, 4, 4)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jFrame_ListadoAnalisis.getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         jTable_ListadoPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -410,22 +374,22 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane8.setViewportView(jTable_ListadoPacientes);
 
         datosAnalisis_CargarOrden9.setFont(new java.awt.Font("Ebrima", 3, 18)); // NOI18N
-        datosAnalisis_CargarOrden9.setText("Listado Análisis");
+        datosAnalisis_CargarOrden9.setText("Listado Pacientes");
 
-        jTextField_buscadorAnalisis1.setText("Ingrese aqui lo que desea buscar...");
-        jTextField_buscadorAnalisis1.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTextField_buscadorPacientes.setText("Ingrese aqui lo que desea buscar...");
+        jTextField_buscadorPacientes.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField_buscadorAnalisis1FocusGained(evt);
+                jTextField_buscadorPacientesFocusGained(evt);
             }
         });
-        jTextField_buscadorAnalisis1.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_buscadorPacientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_buscadorAnalisis1ActionPerformed(evt);
+                jTextField_buscadorPacientesActionPerformed(evt);
             }
         });
-        jTextField_buscadorAnalisis1.addKeyListener(new java.awt.event.KeyAdapter() {
+        jTextField_buscadorPacientes.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                jTextField_buscadorAnalisis1KeyPressed(evt);
+                jTextField_buscadorPacientesKeyPressed(evt);
             }
         });
 
@@ -435,6 +399,10 @@ public class Principal extends javax.swing.JFrame {
                 jComboBox_buscador1ActionPerformed(evt);
             }
         });
+
+        jButton_EliminarPaciente.setText("Eliminar");
+
+        jButton5.setText("Modificar");
 
         javax.swing.GroupLayout jDialog_ListadoPacientesLayout = new javax.swing.GroupLayout(jDialog_ListadoPacientes.getContentPane());
         jDialog_ListadoPacientes.getContentPane().setLayout(jDialog_ListadoPacientesLayout);
@@ -447,23 +415,105 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jDialog_ListadoPacientesLayout.createSequentialGroup()
                         .addComponent(datosAnalisis_CargarOrden9, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_buscadorAnalisis1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jComboBox_buscador1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextField_buscadorPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox_buscador1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_EliminarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(50, Short.MAX_VALUE))
         );
         jDialog_ListadoPacientesLayout.setVerticalGroup(
             jDialog_ListadoPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog_ListadoPacientesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jDialog_ListadoPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jDialog_ListadoPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(datosAnalisis_CargarOrden9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField_buscadorAnalisis1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jComboBox_buscador1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jDialog_ListadoPacientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(datosAnalisis_CargarOrden9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_buscadorPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_buscador1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_EliminarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
                 .addContainerGap())
+        );
+
+        jTable_Analisis.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Codigo", "Nombre", "Indicaciones", "Unidades Bioquimicas", "Consentimiento", "Descartables", "Valores Referencia"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, true, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable_Analisis);
+
+        jLabel2.setText("jLabel2");
+
+        jTextField1.setText("jTextField1");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jButton2.setText("jButton2");
+
+        jButton4.setText("jButton4");
+
+        javax.swing.GroupLayout jDialog_ListadoAnalisisLayout = new javax.swing.GroupLayout(jDialog_ListadoAnalisis.getContentPane());
+        jDialog_ListadoAnalisis.getContentPane().setLayout(jDialog_ListadoAnalisisLayout);
+        jDialog_ListadoAnalisisLayout.setHorizontalGroup(
+            jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog_ListadoAnalisisLayout.createSequentialGroup()
+                .addGroup(jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jDialog_ListadoAnalisisLayout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jDialog_ListadoAnalisisLayout.setVerticalGroup(
+            jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog_ListadoAnalisisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jDialog_ListadoAnalisisLayout.createSequentialGroup()
+                        .addGroup(jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)))
+                .addGap(18, 18, 18)
+                .addGroup(jDialog_ListadoAnalisisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jDialog_ListadoAnalisisLayout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -688,6 +738,15 @@ public class Principal extends javax.swing.JFrame {
             }
         });
 
+        jButton_Analisis_CargarOrden1.setBackground(java.awt.Color.darkGray);
+        jButton_Analisis_CargarOrden1.setFont(new java.awt.Font("Ebrima", 2, 14)); // NOI18N
+        jButton_Analisis_CargarOrden1.setText("Análisis");
+        jButton_Analisis_CargarOrden1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Analisis_CargarOrden1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_CargarOrdenLayout = new javax.swing.GroupLayout(jPanel_CargarOrden);
         jPanel_CargarOrden.setLayout(jPanel_CargarOrdenLayout);
         jPanel_CargarOrdenLayout.setHorizontalGroup(
@@ -734,7 +793,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton_ListadoPaciente_CargarOrden))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 29, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(17, 17, 17)
                 .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
@@ -743,18 +802,19 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
                         .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CargarOrdenLayout.createSequentialGroup()
-                                .addGap(0, 28, Short.MAX_VALUE)
-                                .addComponent(datosAnalisis_CargarOrden5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField_buscadorAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox_buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
-                                .addComponent(jButton1CargarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CargarOrdenLayout.createSequentialGroup()
+                                        .addComponent(datosAnalisis_CargarOrden5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField_buscadorAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jComboBox_buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton1CargarLista)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton_Analisis_CargarOrden1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(jButton_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -783,7 +843,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addComponent(jTextField_Medico_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                         .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(datosPaciente_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton_ListadoPaciente_CargarOrden1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -812,15 +872,15 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(jButton_ObraSocial_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox_ObraSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton1CargarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(datosAnalisis_CargarOrden5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextField_buscadorAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBox_buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(datosAnalisis_CargarOrden5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton1CargarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                                .addGap(5, 5, 5)
-                                .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jTextField_buscadorAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox_buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(8, 8, 8)
+                                .addComponent(jButton_Analisis_CargarOrden1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -968,11 +1028,11 @@ public class Principal extends javax.swing.JFrame {
                 .addGroup(jPanel2_cargarResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2_cargarResultadosLayout.createSequentialGroup()
                         .addComponent(datosAnalisis_CargarOrden4, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jButton2CargarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton2CargarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 849, Short.MAX_VALUE)
                     .addComponent(jScrollPane6)
                     .addGroup(jPanel2_cargarResultadosLayout.createSequentialGroup()
                         .addComponent(datosAnalisis_CargarOrden2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1004,7 +1064,7 @@ public class Principal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         jTextFieldResultadosBuscarOrden.getAccessibleContext().setAccessibleName("");
@@ -1052,11 +1112,11 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(datosAnalisis_CargarOrden6, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(818, Short.MAX_VALUE))
+                .addContainerGap(779, Short.MAX_VALUE))
             .addGroup(jPanel2ListarOrdenesPendientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 1198, Short.MAX_VALUE)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 1159, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         jPanel2ListarOrdenesPendientesLayout.setVerticalGroup(
@@ -1064,12 +1124,12 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(datosAnalisis_CargarOrden6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(458, Short.MAX_VALUE))
+                .addContainerGap(473, Short.MAX_VALUE))
             .addGroup(jPanel2ListarOrdenesPendientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                     .addGap(60, 60, 60)
                     .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(57, Short.MAX_VALUE)))
+                    .addContainerGap(72, Short.MAX_VALUE)))
         );
 
         jTabbedPane_menuPestañas.addTab("Listar Ordenes Pendientes", jPanel2ListarOrdenesPendientes);
@@ -1120,7 +1180,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_stockLayout.createSequentialGroup()
-                        .addComponent(jLabel_nombreStock, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                        .addComponent(jLabel_nombreStock, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
                         .addGap(268, 268, 268))
                     .addGroup(jPanel_stockLayout.createSequentialGroup()
                         .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1163,7 +1223,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton_ActualzarStock, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         jTabbedPane_menuPestañas.addTab("Stock", jPanel_stock);
@@ -1229,7 +1289,7 @@ public class Principal extends javax.swing.JFrame {
                             .addComponent(datosAnalisis_CargarOrden7, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
+                            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
                             .addGroup(jPanel3ImprimirResultadosLayout.createSequentialGroup()
                                 .addComponent(datosAnalisis_CargarOrden8, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))))
@@ -1251,7 +1311,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2CargarResultado1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jTabbedPane_menuPestañas.addTab("Imprimir Resultados", jPanel3ImprimirResultados);
@@ -1260,16 +1320,6 @@ public class Principal extends javax.swing.JFrame {
 
         jButton_Femenino.setText("Iniciar Sesion");
         jPanel4.add(jButton_Femenino, java.awt.BorderLayout.LINE_END);
-
-        jButton_Analisis_CargarOrden1.setBackground(java.awt.Color.darkGray);
-        jButton_Analisis_CargarOrden1.setFont(new java.awt.Font("Ebrima", 2, 14)); // NOI18N
-        jButton_Analisis_CargarOrden1.setText("Análisis");
-        jButton_Analisis_CargarOrden1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Analisis_CargarOrden1ActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jButton_Analisis_CargarOrden1, java.awt.BorderLayout.LINE_START);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -1286,20 +1336,21 @@ public class Principal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(jTabbedPane_menuPestañas, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane_menuPestañas, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_Analisis_CargarOrden1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Analisis_CargarOrden1ActionPerformed
-        jFrame_ListadoAnalisis.setVisible(true);
-        jFrame_ListadoAnalisis.setLocationRelativeTo(jTextField_Apellido);
-        jFrame_ListadoAnalisis.setSize(800, 450);
+        jDialog_ListadoAnalisis.setVisible(true);
+        jDialog_ListadoAnalisis.setLocationRelativeTo(jTextField_Apellido);
+        jDialog_ListadoAnalisis.setSize(800, 600);
+
     }//GEN-LAST:event_jButton_Analisis_CargarOrden1ActionPerformed
 
     // metodo para cargar la tabla de analisis que deben ser seleccionados.
@@ -1325,29 +1376,15 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jTable2_TablaOrdenesPendientesMouseClicked
 
-    private void jTable_AnalisisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_AnalisisMouseClicked
-        Iterator i;
-
-        Integer codigoAnalisis = Integer.parseInt(String.valueOf(modeloTablaAnalisis.getValueAt(jTable_Analisis.getSelectedRow(), 0)));
-        String nombre = String.valueOf(modeloTablaAnalisis.getValueAt(jTable_Analisis.getSelectedRow(), 1));
-        String indicaciones = String.valueOf(modeloTablaAnalisis.getValueAt(jTable_Analisis.getSelectedRow(), 2));
-        Integer cantUB = Integer.parseInt(String.valueOf(modeloTablaAnalisis.getValueAt(jTable_Analisis.getSelectedRow(), 3)));
-        String consentimiento = String.valueOf(modeloTablaAnalisis.getValueAt(jTable_Analisis.getSelectedRow(), 4));
-        Integer descartables = Integer.parseInt(String.valueOf(modeloTablaAnalisis.getValueAt(jTable_Analisis.getSelectedRow(), 5)));
-        String valoresReferencia = String.valueOf(modeloTablaAnalisis.getValueAt(jTable_Analisis.getSelectedRow(), 6));
-        Analisis a = new Analisis(codigoAnalisis, nombre, indicaciones, cantUB, consentimiento, descartables, valoresReferencia);
-
-        ManagerAnalisis ma = new ManagerAnalisis();
-
-
-    }//GEN-LAST:event_jTable_AnalisisMouseClicked
-
     private void jButton2CargarResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2CargarResultadoActionPerformed
         String nombreBio = "El bioqui loco";
         Manager_Ordenes mo = new Manager_Ordenes();
         try {
-            mo.recuperarResultadosDeTabla(modeloTablaAnalisisResultados, jTable4_cargarValoresAnalisis, nombreBio);
-
+            ArrayList<Resultado> lista = mo.recuperarResultadosDeTabla(modeloTablaAnalisisResultados, jTable4_cargarValoresAnalisis, nombreBio);
+            for (Resultado r : lista) {
+                mo.cargarResultado(r.getCodigoOrden(), r.getCodigoAnalisis(), r.getNombreAnalisis(), r.getValorTomado());
+                mo.finalizarOrden(r.getCodigoOrden(), nombreBio);
+            }
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1516,7 +1553,7 @@ public class Principal extends javax.swing.JFrame {
                 String tel = jTextField_telefono.getText();
                 telefono = Long.parseLong(jTextField_telefono.getText());
                 jTextField_telefono.setBackground(Color.white);
-                String regex = "^([0-9][ -]*){8-15}";
+                String regex = "^";
                 Pattern pattern = Pattern.compile(regex);
                 Matcher matcher = pattern.matcher(tel);
                 if (!matcher.matches()) {
@@ -1711,7 +1748,15 @@ public class Principal extends javax.swing.JFrame {
     private void jTable2_TablaOrdenesTerminadasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2_TablaOrdenesTerminadasMouseClicked
         Integer codigoOrden = Integer.parseInt(String.valueOf(modeloTablaOrdenesPendientes.getValueAt(jTable2_TablaOrdenesTerminadas.getSelectedRow(), 0)));
         Manager_Ordenes mo = new Manager_Ordenes();
-        mo.recuperarFilasResultados(codigoOrden);
+        ArrayList<Resultado> lista = mo.recuperarFilasResultados(codigoOrden);
+        String impresion = "Orden n°:"+ codigoOrden+"\n";
+        impresion.concat("Nombre: " );
+        for (Resultado r: lista){
+            if (r.getCodigoOrden() == codigoOrden){
+                System.out.println("tengo el codigo " + r.getCodigoAnalisis());
+                
+            }
+        }
 
     }//GEN-LAST:event_jTable2_TablaOrdenesTerminadasMouseClicked
 
@@ -1858,8 +1903,9 @@ public class Principal extends javax.swing.JFrame {
     private void jButton_ListadoPaciente_CargarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListadoPaciente_CargarOrdenActionPerformed
         jDialog_ListadoPacientes.setVisible(true);
         jDialog_ListadoPacientes.setLocationRelativeTo(jButton_ListadoPaciente_CargarOrden);
-        jDialog_ListadoPacientes.setSize(700, 300);
+
         jDialog_ListadoPacientes.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        jDialog_ListadoPacientes.setSize(900, 400);
         flag = 1;
         bloquear();
     }//GEN-LAST:event_jButton_ListadoPaciente_CargarOrdenActionPerformed
@@ -1962,17 +2008,17 @@ public class Principal extends javax.swing.JFrame {
         jTextField_Edad.setBackground(Color.white);
     }//GEN-LAST:event_jTextField_EdadFocusGained
 
-    private void jTextField_buscadorAnalisis1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_buscadorAnalisis1FocusGained
+    private void jTextField_buscadorPacientesFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_buscadorPacientesFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_buscadorAnalisis1FocusGained
+    }//GEN-LAST:event_jTextField_buscadorPacientesFocusGained
 
-    private void jTextField_buscadorAnalisis1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_buscadorAnalisis1ActionPerformed
+    private void jTextField_buscadorPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_buscadorPacientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_buscadorAnalisis1ActionPerformed
+    }//GEN-LAST:event_jTextField_buscadorPacientesActionPerformed
 
-    private void jTextField_buscadorAnalisis1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_buscadorAnalisis1KeyPressed
+    private void jTextField_buscadorPacientesKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField_buscadorPacientesKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_buscadorAnalisis1KeyPressed
+    }//GEN-LAST:event_jTextField_buscadorPacientesKeyPressed
 
     private void jComboBox_buscador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_buscador1ActionPerformed
         // TODO add your handling code here:
@@ -2068,30 +2114,34 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel fecha_CargarOrden2;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton1CargarLista;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton2CargarResultado;
     private javax.swing.JButton jButton2CargarResultado1;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton_ActualzarStock;
     private javax.swing.JButton jButton_Analisis_CargarOrden1;
     private javax.swing.JButton jButton_CargarOrden;
+    private javax.swing.JButton jButton_EliminarPaciente;
     private javax.swing.JButton jButton_Femenino;
     private javax.swing.JButton jButton_ListadoPaciente_CargarOrden;
     private javax.swing.JButton jButton_ListadoPaciente_CargarOrden1;
     private javax.swing.JLabel jButton_ObraSocial_CargarOrden;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox_ObraSocial;
     private javax.swing.JComboBox<String> jComboBox_buscador;
     private javax.swing.JComboBox<String> jComboBox_buscador1;
     private com.toedter.calendar.JDateChooser jDateChooser_fechaNacimiento;
     private com.toedter.calendar.JDateChooser jDateChooserfechaIngreso;
+    private javax.swing.JDialog jDialog_ListadoAnalisis;
     private javax.swing.JDialog jDialog_ListadoPacientes;
-    private javax.swing.JFrame jFrame_ListadoAnalisis;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel_cantidadActual;
     private javax.swing.JLabel jLabel_cantidadMinima;
     private javax.swing.JLabel jLabel_nombreStock;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2ListarOrdenesPendientes;
     private javax.swing.JPanel jPanel2_cargarResultados;
     private javax.swing.JPanel jPanel3ImprimirResultados;
@@ -2129,13 +2179,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea1_valoresDeReferencia;
     private javax.swing.JTextArea jTextArea_cargarOrden;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldResultadosBuscarOrden;
     private javax.swing.JTextField jTextField_Apellido;
     private javax.swing.JTextField jTextField_Edad;
     private javax.swing.JTextField jTextField_Medico_CargarOrden;
     private javax.swing.JTextField jTextField_Nombre;
     private javax.swing.JTextField jTextField_buscadorAnalisis;
-    private javax.swing.JTextField jTextField_buscadorAnalisis1;
+    private javax.swing.JTextField jTextField_buscadorPacientes;
     private javax.swing.JTextField jTextField_dni;
     private javax.swing.JTextField jTextField_nombreStock;
     private javax.swing.JTextField jTextField_telefono;

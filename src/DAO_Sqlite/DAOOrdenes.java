@@ -23,8 +23,11 @@ import javax.swing.JOptionPane;
 public class DAOOrdenes implements DAOOrden {
 
     @Override
-    public ArrayList<Orden> readOrden() {
-        return DataSrc.readOrden();
+    public ArrayList<Orden> readOrdenes() {
+        return DataSrc.readOrdenes();
+    }
+    public Orden readOrden(int codigoOrden){
+        return DataSrc.readOrden(codigoOrden);
     }
 
     @Override

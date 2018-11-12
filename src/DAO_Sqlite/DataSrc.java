@@ -24,7 +24,29 @@ import javax.swing.JOptionPane;
 public class DataSrc {
 
     // Ordenes //
-    public static ArrayList<Orden> readOrden() {
+    public static Orden readOrden(int codigoORden) {
+        Statement statement = null;
+        String query = "Select * FROM ORDEN WHERE OR_NUMERO =" + codigoORden;
+        Orden a;
+
+        try {
+            statement = ConnectionMethods.getConection().createStatement();
+            ResultSet resultSet = statement.executeQuery(query);
+            a = new Orden((resultSet.getString("OR_FECHA")), (resultSet.getString("OR_MEDICO")), (resultSet.getInt("P_DNI")),(resultSet.getString("P_NOMBRE")),(resultSet.getString("OBRA_SOCIAL")));
+            a.setNumero((resultSet.getInt("OR_NUMERO")));
+            a.setEstado(resultSet.getString("ESTADO"));
+            statement.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            ConnectionMethods.close(statement);
+        }
+        return a;
+    }
+
+    public static ArrayList<Orden> readOrdenes() {
         Statement statement = null;
 
         String query = "Select * FROM ORDEN,PACIENTE,'OBRA SOCIAL' WHERE ORDEN.ESTADO ='PENDIENTE' AND ORDEN.P_DNI = PACIENTE.P_DNI AND ORDEN.OBRA_SOCIAL = 'OBRA SOCIAL'.O_NOMBRE ";
@@ -78,7 +100,7 @@ public class DataSrc {
                     a = new Orden((resultSet.getString("OR_FECHA")), (resultSet.getString("OR_MEDICO")), (p.getDni()), (p.getNombre()), (obra.getNombre()));
                     a.setNumero((resultSet.getInt("OR_NUMERO")));
                     a.setEstado(resultSet.getString("ESTADO"));
-                    a.getBioquimico().setNombre( resultSet.getString("OR_BIOQUIMICO"));
+                    a.getBioquimico().setNombre(resultSet.getString("OR_BIOQUIMICO"));
 
                     datosOrdenes.add(a);
                     System.out.println(a.getEstado());

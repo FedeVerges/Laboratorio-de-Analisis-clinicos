@@ -35,7 +35,10 @@ public class Manager_Ordenes {
     DAOResultados daoResultado = new DAOResultados();
 
     public ArrayList<Orden> recuperarFilas() {
-        return daoOrdenes.readOrden();
+        return daoOrdenes.readOrdenes();
+    }
+    public Orden recuperarOrden(int codigoOrden){
+        return daoOrdenes.readOrden(codigoOrden);
     }
 
     public int cargarOrden(String fecha, String medico, int dni, String nombrePaciente, String nombreObraSocial) {
@@ -58,9 +61,10 @@ public class Manager_Ordenes {
         
     }
 
-    public void recuperarResultadosDeTabla(DefaultTableModel modelo, JTable tabla, String bio) throws SQLException {
+    public ArrayList<Resultado> recuperarResultadosDeTabla(DefaultTableModel modelo, JTable tabla, String bio) throws SQLException {
         String bioquimico = bio;
-        ArrayList<Analisis> lista = new ArrayList();
+        
+        ArrayList<Resultado> lista = new ArrayList();
         int fila = tabla.getRowCount();
         int i;
         //AGREGAR CONTROLES!!!
@@ -71,11 +75,11 @@ public class Manager_Ordenes {
                 r.setCodigoAnalisis((Integer) (modelo.getValueAt(i, 1)));
                 r.setNombreAnalisis(modelo.getValueAt(i, 2).toString());
                 r.setValorTomado((modelo.getValueAt(i, 3)).toString());
+                lista.add(r);
                 
-                cargarResultado(r.getCodigoOrden(),r.getCodigoAnalisis(),r.getNombreAnalisis(),r.getValorTomado());
-                finalizarOrden(r.getCodigoOrden(), bioquimico);
             }
         }
+        return lista;
 
     }
 

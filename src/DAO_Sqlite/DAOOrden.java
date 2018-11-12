@@ -14,8 +14,10 @@ import java.util.ArrayList;
  */
 public interface DAOOrden {
 
-    public ArrayList<Orden> readOrden();
-    
+    public Orden readOrden(int codigoOrden);
+
+    public ArrayList<Orden> readOrdenes();
+
     public ArrayList<Orden> readOrdenesTerminadas();
 
     public Orden createOrden();
@@ -25,10 +27,9 @@ public interface DAOOrden {
     public void modificarOrden(Orden orden);
 
     public void modificarOrdenResultado(Orden orden);
-    
+
     public void deteleOrden(Orden orden);
-    
+
     public int retornarCodigo();
-    
 
 }
