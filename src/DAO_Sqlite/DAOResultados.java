@@ -29,14 +29,21 @@ public class DAOResultados implements DAOResultado {
     public void insertResultado(Resultado resultado) {
         DataSrc.insertResultado(resultado);
     }
+
     @Override
-    public void updateResultado(Resultado resultado){
+    public void updateResultado(Resultado resultado) {
         DataSrc.updateResultado(resultado);
     }
 
     @Override
-    public void deteleResultado(Resultado r) {
-        DataSrc.deleteResultado(r);
+    public void deteleResultadoOrden(Resultado r) {
+        DataSrc.deleteResultadoOrden(r);
+    }
+
+    @Override
+    public void deteleResultadoAnalisis(Resultado r) {
+        DataSrc.deleteResultadoAnalisis(r);
+
     }
 
 }

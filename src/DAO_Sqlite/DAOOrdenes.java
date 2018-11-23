@@ -23,8 +23,8 @@ import javax.swing.JOptionPane;
 public class DAOOrdenes implements DAOOrden {
 
     @Override
-    public ArrayList<Orden> readOrdenes() {
-        return DataSrc.readOrdenes();
+    public ArrayList<Orden> readOrdenesPendientes() {
+        return DataSrc.readOrdenesPendientes();
     }
     public Orden readOrden(int codigoOrden){
         return DataSrc.readOrden(codigoOrden);
@@ -65,6 +65,11 @@ public class DAOOrdenes implements DAOOrden {
     public int retornarCodigo() {
         return DataSrc.retornarCodigo();
         
+    }
+
+    @Override
+    public ArrayList<Orden> readOrdenesDePaciente(int dni) {
+        return DataSrc.readOrdenesDePaciente(dni);
     }
 
 }

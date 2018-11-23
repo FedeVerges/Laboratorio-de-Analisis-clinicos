@@ -5,6 +5,7 @@
  */
 package DAO_Sqlite;
 
+import Clases.Obra_Social;
 import Clases.Paciente;
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public interface DAOPaciente {
 
     public ArrayList<Paciente> read();
 
-    public String readObrasocialPaciente(int dni);
+    public ArrayList<Obra_Social> readObrasocialPaciente(int dni);
 
     public Paciente create();
 

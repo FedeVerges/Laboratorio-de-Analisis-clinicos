@@ -2,6 +2,7 @@
 package Manager;
 
 import Base_de_Datos.ConnectionMethods;
+import Clases.Obra_Social;
 import Clases.Paciente;
 import DAO_Sqlite.DAOPacientes;
 import java.sql.Date;
@@ -27,10 +28,11 @@ public class ManagerPaciente {
         return daoPaciente.read();
     }
 
-    public String recuperarObraSocial(int dni) {
+    public ArrayList<Obra_Social> recuperarObraSocial(int dni) {
         return daoPaciente.readObrasocialPaciente(dni);
 
     }
+    
 
     public void cargarPaciente(String nombre, String apellido, int dni, Long telefono, String fNacimiento, int edad, String sexo) throws SQLException {
        Paciente p = daoPaciente.create();
@@ -61,6 +63,12 @@ public class ManagerPaciente {
         String sexo = (modelo.getValueAt(tabla.getSelectedRow(), 6).toString());
         Paciente p = new Paciente(nombre, Apellido, dni, telefono, fechaN, edad, sexo);
         return p;
+    }
+    
+    public void deletePaciente(int dni){
+        Paciente p= daoPaciente.create();
+        p.setDni(dni);
+        daoPaciente.delete(p);
     }
 
 }

@@ -1,9 +1,0 @@
-Orden n°:1
-Nombre y Apellido: Federico Verges
-DNI:41221778
-Sexo :Masculino
-Edad: 20
-
-Analisis: 
-HPV:  Positivo
-HIV:  Negativo

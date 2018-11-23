@@ -19,8 +19,8 @@ public class Analisis{
     private String nombre;
     private String indicacionesPrevias;
     private int cantidadUnidadesB;
-    private String consentimiento;
-    private int costoDescartables; // cantidad de descartables consumidos.
+    private Boolean consentimiento;
+    private Descartable descartable; // cantidad de descartables consumidos.
     private String valoresReferencia;
 
     
@@ -29,20 +29,18 @@ public class Analisis{
         this.codigo = codigo;
         this.nombre = nombre;
         this.cantidadUnidadesB=0;
-        this.consentimiento="";
+        this.consentimiento=false;
         this.indicacionesPrevias="";
-        this.costoDescartables=0;
         this.valoresReferencia="";
     }
     
     
-    public Analisis(int codigo, String nombre, String indicacionesPrevias, int cantidadUnidadesB, String consentimiento, int costoDescartables, String valoresReferencia) {
+    public Analisis(int codigo, String nombre, String indicacionesPrevias, int cantidadUnidadesB, Boolean consentimiento, String valoresReferencia) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.indicacionesPrevias = indicacionesPrevias;
         this.cantidadUnidadesB = cantidadUnidadesB;
         this.consentimiento = consentimiento;
-        this.costoDescartables = costoDescartables;
         this.valoresReferencia = valoresReferencia;
     }
     
@@ -63,12 +61,12 @@ public class Analisis{
         return cantidadUnidadesB;
     }
 
-    public String getConsentimiento() {
+    public Boolean getConsentimiento() {
         return consentimiento;
     }
 
-    public int getCostoDescartables() {
-        return costoDescartables;
+    public Descartable getDescartable() {
+        return this.descartable;
     }
 
     public String getValoresReferencia() {
@@ -92,12 +90,12 @@ public class Analisis{
         this.cantidadUnidadesB = cantidadUnidadesB;
     }
 
-    public void setConsentimiento(String consentimiento) {
+    public void setConsentimiento(Boolean consentimiento) {
         this.consentimiento = consentimiento;
     }
 
-    public void setCostoDescartables(int costoDescartables) {
-        this.costoDescartables = costoDescartables;
+    public void setDescartable(Descartable descartables) {
+        this.descartable = descartable;
     }
 
     public void setValoresReferencia(String valoresReferencia) {

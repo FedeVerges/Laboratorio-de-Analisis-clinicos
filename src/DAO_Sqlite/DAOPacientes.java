@@ -6,6 +6,7 @@
 package DAO_Sqlite;
 
 import Base_de_Datos.ConnectionMethods;
+import Clases.Obra_Social;
 import Clases.Paciente;
 import com.sun.org.apache.bcel.internal.generic.D2F;
 import java.sql.PreparedStatement;
@@ -27,7 +28,7 @@ public class DAOPacientes implements DAOPaciente{
 
     }
 
-    public String readObrasocialPaciente(int dni) {
+    public ArrayList<Obra_Social> readObrasocialPaciente(int dni) {
        return DataSrc.readObrasocialPaciente(dni);
         
     }

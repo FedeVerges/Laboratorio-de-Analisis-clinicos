@@ -23,10 +23,8 @@ public class Orden {
     private Obra_Social obraSocial;
     private String estado;
     private Bioquimico  bioquimico;
-    private ArrayList<Analisis> analisis;
 
     public Orden(String fechaDeIngreso, String Medico, int dniPaciente, String nombrePaciente, String obraSocial) {
-        this.analisis = new ArrayList<>();
         this.paciente = new Paciente();
         this.bioquimico = new Bioquimico();
         this.obraSocial = new Obra_Social();
@@ -95,14 +93,6 @@ public class Orden {
         this.bioquimico = bioquimico;
     }
 
-    
-    public ArrayList<Analisis> getAnalisis() {
-        return analisis;
-    }
-
-    public void setAnalisis(ArrayList<Analisis> analisis) {
-        this.analisis = analisis;
-    }
     
     
 

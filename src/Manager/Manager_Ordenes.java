@@ -7,6 +7,7 @@ package Manager;
 
 import Base_de_Datos.ConnectionMethods;
 import Clases.Analisis;
+import Clases.Bioquimico;
 import Clases.Obra_Social;
 //import Clases.Analisis;
 import Clases.Orden;
@@ -35,7 +36,7 @@ public class Manager_Ordenes {
     DAOResultados daoResultado = new DAOResultados();
 
     public ArrayList<Orden> recuperarFilas() {
-        return daoOrdenes.readOrdenes();
+        return daoOrdenes.readOrdenesPendientes();
     }
     public Orden recuperarOrden(int codigoOrden){
         return daoOrdenes.readOrden(codigoOrden);
@@ -60,8 +61,12 @@ public class Manager_Ordenes {
         return daoResultado.readResultado(codigoOrden);
         
     }
+    public ArrayList<Orden> readOrdenDePaciente(int dni){
+        return daoOrdenes.readOrdenesDePaciente(dni);
+    }
 
     public ArrayList<Resultado> recuperarResultadosDeTabla(DefaultTableModel modelo, JTable tabla, String bio) throws SQLException {
+        
         String bioquimico = bio;
         
         ArrayList<Resultado> lista = new ArrayList();
@@ -83,20 +88,29 @@ public class Manager_Ordenes {
 
     }
 
-    public void finalizarOrden(int CodigoOrden, String bioquimico) throws SQLException {
+    public void finalizarOrden(int CodigoOrden, Bioquimico bioquimico) {
         Orden orden = daoOrdenes.createOrden();
-        orden.getBioquimico().setNombre(bioquimico);
+        orden.setBioquimico(bioquimico);
         orden.setNumero(CodigoOrden);
+        orden.setEstado("TERMINADO");
         daoOrdenes.modificarOrdenResultado(orden);
     }
 
-    public void cargarResultado(int codigo, int codigoAnalisis,String nombre,String valor) throws SQLException {
+    public void cargarResultado(int codigo, int codigoAnalisis,String nombre,String valor){
         Resultado res = daoResultado.createResultado();
         res.setCodigoOrden(codigo);
         res.setCodigoAnalisis(codigoAnalisis);
         res.setNombreAnalisis(nombre);
         res.setValorTomado(valor);
         daoResultado.insertResultado(res);
+    }
+    public void actualizarResultado(int codigo, int codigoAnalisis,String nombre,String valor){
+        Resultado res = daoResultado.createResultado();
+        res.setCodigoOrden(codigo);
+        res.setCodigoAnalisis(codigoAnalisis);
+        res.setNombreAnalisis(nombre);
+        res.setValorTomado(valor);
+        daoResultado.updateResultado(res);
     }
 
     public ArrayList<Orden> recuperarFilasTerminadas() {

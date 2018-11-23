@@ -23,6 +23,7 @@ public class Paciente {
     private ArrayList<Obra_Social> obraSocial;
 
     public Paciente(String nombre, String apellido, int dni, Long telefono, String fechaNacimiento, int edad, String sexo) {
+        this.obraSocial = new ArrayList<>();
         this.nombre = nombre;
         this.apellido = apellido;
         this.dni = dni;
@@ -97,7 +98,6 @@ public class Paciente {
     }
 
     public void setObraSocial(String obraSocial) {
-        this.obraSocial = new ArrayList<>();
         Obra_Social o = new Obra_Social();
         o.setNombre(obraSocial);
         this.obraSocial.add(o);

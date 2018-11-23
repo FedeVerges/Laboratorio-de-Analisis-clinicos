@@ -22,6 +22,8 @@ public interface DAOResultado {
     
     public void updateResultado(Resultado resultado);
     
-    public void deteleResultado(Resultado r);
+    public void deteleResultadoOrden(Resultado r);
+    
+    public void deteleResultadoAnalisis(Resultado r);
 
 }

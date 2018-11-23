@@ -15,8 +15,10 @@ import java.util.ArrayList;
 public interface DAOOrden {
 
     public Orden readOrden(int codigoOrden);
+    
+    public ArrayList<Orden> readOrdenesDePaciente(int dni);
 
-    public ArrayList<Orden> readOrdenes();
+    public ArrayList<Orden> readOrdenesPendientes();
 
     public ArrayList<Orden> readOrdenesTerminadas();
 
