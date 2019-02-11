@@ -51,7 +51,6 @@ import sun.security.util.Password;
  */
 public class Principal extends javax.swing.JFrame {
 
-    // Bioquimicos
     private DefaultTableModel modeloTablaAnalisis;
     private DefaultTableModel modeloTablaAnalisisParaSeleccionar;
     private DefaultTableModel modeloTablaOrdenesPendientes;
@@ -61,6 +60,8 @@ public class Principal extends javax.swing.JFrame {
     private DefaultTableModel modeloTablaListadoPacientes;
 
     private DefaultComboBoxModel modeloComboBox;
+    private DefaultComboBoxModel modeloComboBoxNombreMedicos;
+    
 
     private DefaultTableModel modeloTablaPaciente;
     private Manager_Ordenes managerOrdenes = new Manager_Ordenes();
@@ -72,22 +73,25 @@ public class Principal extends javax.swing.JFrame {
     private ArrayList<Bioquimico> bioquimicos;
     Bioquimico dueño1 = new Bioquimico("Federico", "Verges", 41221778, "20-41221778-1");
     Bioquimico dueño2 = new Bioquimico("Noelia", "Perez", 18400600, "22-18400600-8");
+    
+    
 
-    private HashMap<String, Password> usuarios;
+    // private HashMap<String, Password> usuarios;
 
+    
     // managers //
     private ManagerAnalisis ma = new ManagerAnalisis();
     private ManagerPaciente mp = new ManagerPaciente();
     private Manager_Ordenes mo = new Manager_Ordenes();
 
-    //private static int fila2=0;
     /**
      * Creates new form Principal
      */
     public Principal() {
-        usuarios = new HashMap<>();
+        // usuarios = new HashMap<>();
+        
+        
         //Tabla emergente del boton
-        //CONTROLAR ESTO!!!!!
 
         // creo datos locales de analisis
         datosAnalisis = ma.recuperarFilas();
@@ -96,19 +100,29 @@ public class Principal extends javax.swing.JFrame {
         bioquimicos.add(dueño1);
         bioquimicos.add(dueño2);
 
-        /*usuarios.put(bioquimicos.get(0).getNombre(),"12345");
+        /*
+        usuarios.put(bioquimicos.get(0).getNombre(),"12345");
         usuarios.put(bioquimicos.get(1).getNombre(),"asdf");
          */
         initComponents();
+        // Inicializar ComboBox con los Bioquimicos.
+        // jComboBox_NombreBioquimicos.setSelectedIndex(0);
+        String bio [] = new String[2];
+        bio[0]= bioquimicos.get(0).getNombre();
+        bio[1]= bioquimicos.get(1).getNombre();
+        
+        ComboBoxModel modelo_ComboBoxNombreMedicos = new DefaultComboBoxModel(bio);
+        
+         jComboBox_NombreBioquimicos.setModel(modelo_ComboBoxNombreMedicos);
         //Tablas pestaña Impimir Resultados:
         modeloTablaOrdenesTerminadas = (DefaultTableModel) jTable2_TablaOrdenesTerminadas.getModel();
         jTable2_TablaOrdenesTerminadas.setModel(modeloTablaOrdenesTerminadas);
 
         modeloComboBox = (DefaultComboBoxModel) jComboBox_ObraSocial.getModel();
         jComboBox_ObraSocial.setModel(modeloComboBox);
-
-        // falta agregar la tabla de los resultados ya cargados. Posiblemente se pueda reutilizar la de cargar resultados
+        
         // PESTAÑA CARGAR RESULTADOS
+        
         //Tablas
         modeloTablaOrdenesPendientes = (DefaultTableModel) jTable2_TablaOrdenesPendientes.getModel();
         jTable2_TablaOrdenesPendientes.setModel(modeloTablaOrdenesPendientes);
@@ -341,6 +355,9 @@ public class Principal extends javax.swing.JFrame {
         jButton9 = new javax.swing.JButton();
         jButton_abrirIndicaciones = new javax.swing.JButton();
         jButton_abrirValoresReferencia = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jButton_Femenino = new javax.swing.JButton();
+        jComboBox_NombreBioquimicos = new javax.swing.JComboBox<>();
         jTabbedPane_menuPestañas = new javax.swing.JTabbedPane();
         jPanel_CargarOrden = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -414,9 +431,6 @@ public class Principal extends javax.swing.JFrame {
         jSpinner1 = new javax.swing.JSpinner();
         jSpinner2 = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        jButton_Femenino = new javax.swing.JButton();
-        jComboBox_NombreBioquimicos = new javax.swing.JComboBox<>();
 
         jTable_ListadoPacientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -900,6 +914,41 @@ public class Principal extends javax.swing.JFrame {
         setLocation(new java.awt.Point(50, 0));
         setName("Principal"); // NOI18N
 
+        jPanel4.setBackground(new java.awt.Color(240, 235, 235));
+
+        jButton_Femenino.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
+        jButton_Femenino.setText("Iniciar Sesion");
+        jButton_Femenino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_FemeninoActionPerformed(evt);
+            }
+        });
+
+        jComboBox_NombreBioquimicos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_NombreBioquimicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_NombreBioquimicosActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jButton_Femenino)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBox_NombreBioquimicos, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jButton_Femenino, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox_NombreBioquimicos, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
+
         jTabbedPane_menuPestañas.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane_menuPestañas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 3));
         jTabbedPane_menuPestañas.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 2, 14)); // NOI18N
@@ -1088,6 +1137,7 @@ public class Principal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTableAnalasisParaSeleccionar.setRowHeight(20);
         jTableAnalasisParaSeleccionar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableAnalasisParaSeleccionarMouseClicked(evt);
@@ -1126,6 +1176,7 @@ public class Principal extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
+        jTable_AnalisisSeleccionados.setRowHeight(20);
         jTable_AnalisisSeleccionados.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable_AnalisisSeleccionadosMouseClicked(evt);
@@ -1358,6 +1409,7 @@ public class Principal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable2_TablaOrdenesPendientes.setRowHeight(20);
         jTable2_TablaOrdenesPendientes.setSelectionBackground(new java.awt.Color(153, 153, 153));
         jTable2_TablaOrdenesPendientes.setSelectionForeground(new java.awt.Color(0, 0, 0));
         jTable2_TablaOrdenesPendientes.getTableHeader().setReorderingAllowed(false);
@@ -1497,16 +1549,16 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2_cargarResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2_cargarResultadosLayout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2_cargarResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(datosAnalisis_CargarOrden4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2CargarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 441, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5))
+                .addGap(113, 113, 113))
         );
 
         jTextFieldResultadosBuscarOrden.getAccessibleContext().setAccessibleName("");
@@ -1569,12 +1621,12 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(datosAnalisis_CargarOrden6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(648, Short.MAX_VALUE))
+                .addContainerGap(663, Short.MAX_VALUE))
             .addGroup(jPanel2ListarOrdenesPendientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                     .addGap(60, 60, 60)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(252, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(51, Short.MAX_VALUE)))
         );
 
         jTabbedPane_menuPestañas.addTab("Listar Ordenes Pendientes", jPanel2ListarOrdenesPendientes);
@@ -1608,6 +1660,7 @@ public class Principal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable2_TablaOrdenesTerminadas.setRowHeight(20);
         jTable2_TablaOrdenesTerminadas.getTableHeader().setReorderingAllowed(false);
         jTable2_TablaOrdenesTerminadas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1662,12 +1715,12 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(datosAnalisis_CargarOrden7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(datosAnalisis_CargarOrden8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane11)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
+                .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                    .addComponent(jScrollPane11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_imprimirResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(214, Short.MAX_VALUE))
+                .addGap(111, 111, 111))
         );
 
         jTabbedPane_menuPestañas.addTab("Imprimir Resultados", jPanel3ImprimirResultados);
@@ -1763,46 +1816,12 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton_ActualzarStock, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addContainerGap(262, Short.MAX_VALUE))
         );
 
         jTabbedPane_menuPestañas.addTab("Stock", jPanel_stock);
 
         getContentPane().add(jTabbedPane_menuPestañas, java.awt.BorderLayout.CENTER);
-
-        jPanel4.setBackground(new java.awt.Color(240, 235, 235));
-
-        jButton_Femenino.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
-        jButton_Femenino.setText("Iniciar Sesion");
-        jButton_Femenino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_FemeninoActionPerformed(evt);
-            }
-        });
-
-        jComboBox_NombreBioquimicos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox_NombreBioquimicosActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jButton_Femenino)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox_NombreBioquimicos, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButton_Femenino, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jComboBox_NombreBioquimicos, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1841,7 +1860,9 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable2_TablaOrdenesPendientesMouseClicked
 
     private void jButton2CargarResultadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2CargarResultadoActionPerformed
-        String nombreBio = bioquimicos.get(0).getNombre() + bioquimicos.get(0).getApellido();
+         // String nombreBio = bioquimicos.get(0).getNombre() + bioquimicos.get(0).getApellido();
+         String nombreBio = (String) jComboBox_NombreBioquimicos.getSelectedItem();
+        
         Manager_Ordenes mo = new Manager_Ordenes();
         Boolean control = true;
         ArrayList<Resultado> lista = null;
@@ -1855,8 +1876,16 @@ public class Principal extends javax.swing.JFrame {
                 control = false;
             } else if (control) {
                 mo.actualizarResultado(r.getCodigoOrden(), r.getCodigoAnalisis(), r.getNombreAnalisis(), r.getValorTomado());
-                mo.finalizarOrden(r.getCodigoOrden(), bioquimicos.get(0));
-            }
+                
+                 // Obtener el Bioquimico.
+                 
+                if(nombreBio == "Fede"){
+                    mo.finalizarOrden(r.getCodigoOrden(), bioquimicos.get(0));
+                }else if (nombreBio == "Noelia"){
+                    mo.finalizarOrden(r.getCodigoOrden(), bioquimicos.get(1));
+                }
+                    
+                   }
         }
         if (control == false) {
             JOptionPane.showMessageDialog(null, "No se pueden cargar resultados vacios o con campos invalidos");
@@ -2030,7 +2059,7 @@ public class Principal extends javax.swing.JFrame {
             int año = Calendar.getInstance().get(Calendar.YEAR);
             try {
                 int añoNacimiento = jDateChooser_fechaNacimiento.getCalendar().get(Calendar.YEAR);
-                if (edad != año - añoNacimiento) {
+                if (edad != (año-1) - añoNacimiento) {
                     jTextField_Edad.setBackground(Color.red);
                     jDateChooser_fechaNacimiento.setForeground(Color.red);
                     control = false;
@@ -2321,9 +2350,11 @@ public class Principal extends javax.swing.JFrame {
                 fNacimiento = dameFecha(fecha);
 
                 // recuparar analsiis de la lista.
+                
                 try {
+                    
                     // Carga de los resultados pendientes.
-
+                    
                     ArrayList<Analisis> listaCodigos = ma.recuperarCodigos(modeloTablaAnalisisSelecionados, jTable_AnalisisSeleccionados);
                     if (listaCodigos.isEmpty()) {
                         JOptionPane.showMessageDialog(null, "NO SE PUEDEN CARGAR ORDENES SIN ANALISIS\n"
@@ -2331,6 +2362,9 @@ public class Principal extends javax.swing.JFrame {
                     } else {
 
                         mp.cargarPaciente(nombre, apellido, dni, telefono, fNacimiento, edad, sexo);
+                        
+                        // carga la obra social.
+                        
                         String obraSocial = (String) jComboBox_ObraSocial.getSelectedItem();
                         try {
                             if (obraSocial.equals("")) {
@@ -2344,6 +2378,7 @@ public class Principal extends javax.swing.JFrame {
                         }
 
                         codigo = mo.cargarOrden(fechaIngreso, nombreMedico, dni, nombre, obraSocial);
+                        
                         for (Analisis a : listaCodigos) {
                             if (a.getConsentimiento() == true) {
                                 JOptionPane.showMessageDialog(null, "Para la realizacion del ANALISIS " + a.getNombre() + "\nse requiere un consentimiento por parte del paciente.");
@@ -2717,9 +2752,10 @@ public class Principal extends javax.swing.JFrame {
             jRadioButton_femenino.setSelected(true);
         }
 
-        obraSocial = mp.recuperarObraSocial(p.getDni());
+        obraSocial = mp.recuperarObraSocial(p.getDni()); // Recupero las Obra Sociales del paciente con el DNI.
+        
         int i;
-        for (i = 0; i < obraSocial.size(); i++) {
+        for (i = 0; i < obraSocial.size(); i++) { // Recorro el arreglo de obras sociales de dicho paciente.
             try {
                 switch (obraSocial.get(i).getNombre()) {
                     case ("Swiss Medical"):
