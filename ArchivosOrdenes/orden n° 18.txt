@@ -1,0 +1,13 @@
+Orden n°:18
+Nombre y Apellido: noelia dominguez
+DNI:28901173
+Sexo :Femenino
+Edad: 38
+Bioquimico: Federico Verges
+Medico: rene Favaloro
+
+
+
+Analisis: 
+HPV:  reactivo
+hjkl

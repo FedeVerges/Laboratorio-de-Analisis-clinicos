@@ -1,0 +1,13 @@
+Orden n°:17
+Nombre y Apellido: Juan Ignacio Verges
+DNI:36046454
+Sexo :Masculino
+Edad: 26
+Bioquimico: Federico Verges
+Medico: xdxdfdx
+
+
+
+Analisis: 
+HPV:  5
+HIV:  2323
