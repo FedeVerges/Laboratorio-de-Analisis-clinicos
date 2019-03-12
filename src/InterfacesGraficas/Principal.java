@@ -42,14 +42,18 @@ import java.util.TimeZone;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.border.LineBorder;
-import javax.swing.border.TitledBorder;
-import sun.security.util.Password;
 
 /**
  *
  * @author fede_
  */
 public class Principal extends javax.swing.JFrame {
+    
+    
+    // Ajuste de la resolución de la pantalla del usuario 
+    int width = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+    int high =  java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+    
 
     private DefaultTableModel modeloTablaAnalisis;
     private DefaultTableModel modeloTablaAnalisisParaSeleccionar;
@@ -913,6 +917,7 @@ public class Principal extends javax.swing.JFrame {
         setForeground(new java.awt.Color(204, 204, 204));
         setLocation(new java.awt.Point(50, 0));
         setName("Principal"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1200, 700));
 
         jPanel4.setBackground(new java.awt.Color(240, 235, 235));
 
@@ -936,18 +941,18 @@ public class Principal extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jButton_Femenino)
+                .addComponent(jButton_Femenino, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jComboBox_NombreBioquimicos, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jButton_Femenino, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(jComboBox_NombreBioquimicos, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton_Femenino, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(jComboBox_NombreBioquimicos))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        getContentPane().add(jPanel4, java.awt.BorderLayout.PAGE_START);
 
         jTabbedPane_menuPestañas.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane_menuPestañas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153), 3));
@@ -960,15 +965,20 @@ public class Principal extends javax.swing.JFrame {
 
         jPanel_CargarOrden.setBackground(new java.awt.Color(240, 235, 235));
         jPanel_CargarOrden.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel_CargarOrden.setPreferredSize(new java.awt.Dimension(1100, 500));
+        jPanel_CargarOrden.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 16)); // NOI18N
         jLabel1.setText("Ingrese los datos de la Orden");
+        jPanel_CargarOrden.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 8, 298, -1));
 
         fecha_CargarOrden.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         fecha_CargarOrden.setText("Fecha");
+        jPanel_CargarOrden.add(fecha_CargarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 42, 63, 27));
 
         Medico_cargarOrden.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         Medico_cargarOrden.setText("Medico");
+        jPanel_CargarOrden.add(Medico_cargarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 63, 32));
 
         jTextField_Medico_CargarOrden.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_Medico_CargarOrden.setText("ingrese el nombre del medico");
@@ -979,9 +989,11 @@ public class Principal extends javax.swing.JFrame {
                 jTextField_Medico_CargarOrdenFocusGained(evt);
             }
         });
+        jPanel_CargarOrden.add(jTextField_Medico_CargarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 87, 229, 32));
 
         datosPaciente_CargarOrden.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 16)); // NOI18N
         datosPaciente_CargarOrden.setText("Datos Paciente");
+        jPanel_CargarOrden.add(datosPaciente_CargarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 157, 127, 36));
 
         jButton_ListadoPaciente_CargarOrden.setBackground(new java.awt.Color(150, 177, 255));
         jButton_ListadoPaciente_CargarOrden.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
@@ -992,6 +1004,7 @@ public class Principal extends javax.swing.JFrame {
                 jButton_ListadoPaciente_CargarOrdenActionPerformed(evt);
             }
         });
+        jPanel_CargarOrden.add(jButton_ListadoPaciente_CargarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(275, 158, 101, 35));
 
         jTextField_Nombre.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_Nombre.setText("ingrese el nombre");
@@ -1002,11 +1015,17 @@ public class Principal extends javax.swing.JFrame {
                 jTextField_NombreFocusGained(evt);
             }
         });
+        jTextField_Nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_NombreActionPerformed(evt);
+            }
+        });
         jTextField_Nombre.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jTextField_NombreKeyTyped(evt);
             }
         });
+        jPanel_CargarOrden.add(jTextField_Nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 200, 32));
 
         jTextField_Apellido.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_Apellido.setText("ingrese el apellido");
@@ -1022,6 +1041,7 @@ public class Principal extends javax.swing.JFrame {
                 jTextField_ApellidoActionPerformed(evt);
             }
         });
+        jPanel_CargarOrden.add(jTextField_Apellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 250, 200, 31));
 
         jTextField_dni.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_dni.setText("ingrese el dni");
@@ -1037,6 +1057,7 @@ public class Principal extends javax.swing.JFrame {
                 jTextField_dniActionPerformed(evt);
             }
         });
+        jPanel_CargarOrden.add(jTextField_dni, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 290, 200, 31));
 
         jTextField_telefono.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_telefono.setText("ingrese el telefono");
@@ -1047,15 +1068,24 @@ public class Principal extends javax.swing.JFrame {
                 jTextField_telefonoFocusGained(evt);
             }
         });
+        jTextField_telefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_telefonoActionPerformed(evt);
+            }
+        });
+        jPanel_CargarOrden.add(jTextField_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 200, 31));
 
         fecha_CargarOrden1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         fecha_CargarOrden1.setText("Fecha de Nacimieto");
+        jPanel_CargarOrden.add(fecha_CargarOrden1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 128, 27));
 
         fecha_CargarOrden2.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         fecha_CargarOrden2.setText("Sexo");
+        jPanel_CargarOrden.add(fecha_CargarOrden2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 470, 45, 27));
 
         datosAnalisis_CargarOrden1.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 16)); // NOI18N
         datosAnalisis_CargarOrden1.setText("Análisis Seleccionados");
+        jPanel_CargarOrden.add(datosAnalisis_CargarOrden1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 350, 207, 36));
 
         jRadioButton_masculino.setBackground(new java.awt.Color(204, 204, 204));
         buttonGroup_sexo.add(jRadioButton_masculino);
@@ -1067,27 +1097,37 @@ public class Principal extends javax.swing.JFrame {
                 jRadioButton_masculinoActionPerformed(evt);
             }
         });
+        jPanel_CargarOrden.add(jRadioButton_masculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 470, -1, -1));
 
         jRadioButton_femenino.setBackground(new java.awt.Color(204, 204, 204));
         buttonGroup_sexo.add(jRadioButton_femenino);
         jRadioButton_femenino.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jRadioButton_femenino.setText("Femenino");
         jRadioButton_femenino.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jRadioButton_femenino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton_femeninoActionPerformed(evt);
+            }
+        });
+        jPanel_CargarOrden.add(jRadioButton_femenino, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 470, -1, -1));
 
         jButton_CargarOrden.setBackground(new java.awt.Color(150, 177, 255));
         jButton_CargarOrden.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jButton_CargarOrden.setText("Cargar Orden");
-        jButton_CargarOrden.setBorder(null);
+        jButton_CargarOrden.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton_CargarOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_CargarOrdenActionPerformed(evt);
             }
         });
+        jPanel_CargarOrden.add(jButton_CargarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 470, 120, 47));
 
         jTextArea_cargarOrden.setColumns(20);
         jTextArea_cargarOrden.setRows(5);
         jTextArea_cargarOrden.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane4.setViewportView(jTextArea_cargarOrden);
+
+        jPanel_CargarOrden.add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 390, 350, 200));
 
         jTextField_Edad.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_Edad.setText("ingrese la edad");
@@ -1098,19 +1138,27 @@ public class Principal extends javax.swing.JFrame {
                 jTextField_EdadFocusGained(evt);
             }
         });
+        jTextField_Edad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_EdadActionPerformed(evt);
+            }
+        });
+        jPanel_CargarOrden.add(jTextField_Edad, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 370, 200, 31));
 
         datosAnalisis_CargarOrden5.setFont(new java.awt.Font("Microsoft JhengHei UI", 1, 16)); // NOI18N
         datosAnalisis_CargarOrden5.setText("Listado Análisis");
+        jPanel_CargarOrden.add(datosAnalisis_CargarOrden5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 130, 42));
 
         jButton1CargarLista.setBackground(new java.awt.Color(150, 177, 255));
         jButton1CargarLista.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jButton1CargarLista.setText("Cargar Analisis ");
-        jButton1CargarLista.setBorder(null);
+        jButton1CargarLista.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton1CargarLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1CargarListaActionPerformed(evt);
             }
         });
+        jPanel_CargarOrden.add(jButton1CargarLista, new org.netbeans.lib.awtextra.AbsoluteConstraints(1040, 20, 113, 36));
 
         jTableAnalasisParaSeleccionar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTableAnalasisParaSeleccionar.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
@@ -1145,8 +1193,11 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTableAnalasisParaSeleccionar);
 
+        jPanel_CargarOrden.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 70, 770, 266));
+
         jButton_ObraSocial_CargarOrden.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jButton_ObraSocial_CargarOrden.setText("Obra Social");
+        jPanel_CargarOrden.add(jButton_ObraSocial_CargarOrden, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 510, 100, 36));
 
         jComboBox_ObraSocial.setBackground(new java.awt.Color(204, 204, 255));
         jComboBox_ObraSocial.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
@@ -1157,6 +1208,8 @@ public class Principal extends javax.swing.JFrame {
                 jComboBox_ObraSocialActionPerformed(evt);
             }
         });
+        jPanel_CargarOrden.add(jComboBox_ObraSocial, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 510, 140, 36));
+        jPanel_CargarOrden.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 136, 370, 12));
 
         jTable_AnalisisSeleccionados.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jTable_AnalisisSeleccionados.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
@@ -1184,6 +1237,8 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane9.setViewportView(jTable_AnalisisSeleccionados);
 
+        jPanel_CargarOrden.add(jScrollPane9, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 390, 207, 200));
+
         jButton_ListadoPaciente_CargarOrden1.setBackground(new java.awt.Color(150, 177, 255));
         jButton_ListadoPaciente_CargarOrden1.setFont(new java.awt.Font("Microsoft JhengHei UI Light", 0, 14)); // NOI18N
         jButton_ListadoPaciente_CargarOrden1.setText("Cargar Nuevo");
@@ -1193,6 +1248,7 @@ public class Principal extends javax.swing.JFrame {
                 jButton_ListadoPaciente_CargarOrden1ActionPerformed(evt);
             }
         });
+        jPanel_CargarOrden.add(jButton_ListadoPaciente_CargarOrden1, new org.netbeans.lib.awtextra.AbsoluteConstraints(148, 158, 117, 35));
 
         jTextField_buscadorAnalisis.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
         jTextField_buscadorAnalisis.setText("Ingrese aqui lo que desea buscar...");
@@ -1213,6 +1269,7 @@ public class Principal extends javax.swing.JFrame {
                 jTextField_buscadorAnalisisKeyPressed(evt);
             }
         });
+        jPanel_CargarOrden.add(jTextField_buscadorAnalisis, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 20, 250, 37));
 
         jComboBox_buscador.setBackground(new java.awt.Color(204, 204, 255));
         jComboBox_buscador.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
@@ -1223,10 +1280,13 @@ public class Principal extends javax.swing.JFrame {
                 jComboBox_buscadorActionPerformed(evt);
             }
         });
+        jPanel_CargarOrden.add(jComboBox_buscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 20, 107, 37));
 
         jDateChooserfechaIngreso.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel_CargarOrden.add(jDateChooserfechaIngreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 41, 140, 28));
 
         jDateChooser_fechaNacimiento.setBackground(new java.awt.Color(153, 153, 153));
+        jPanel_CargarOrden.add(jDateChooser_fechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 430, 140, 27));
 
         jButton_Analisis_CargarOrden1.setBackground(new java.awt.Color(150, 177, 255));
         jButton_Analisis_CargarOrden1.setFont(new java.awt.Font("Microsoft YaHei UI Light", 0, 14)); // NOI18N
@@ -1237,149 +1297,7 @@ public class Principal extends javax.swing.JFrame {
                 jButton_Analisis_CargarOrden1ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel_CargarOrdenLayout = new javax.swing.GroupLayout(jPanel_CargarOrden);
-        jPanel_CargarOrden.setLayout(jPanel_CargarOrdenLayout);
-        jPanel_CargarOrdenLayout.setHorizontalGroup(
-            jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_Nombre)
-                    .addComponent(jTextField_Apellido)
-                    .addComponent(jTextField_dni)
-                    .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Medico_cargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fecha_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_Medico_CargarOrden)
-                            .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jDateChooserfechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jTextField_telefono)
-                    .addComponent(jTextField_Edad)
-                    .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton_ObraSocial_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fecha_CargarOrden1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jDateChooser_fechaNacimiento, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox_ObraSocial, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                        .addComponent(fecha_CargarOrden2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jRadioButton_masculino)
-                        .addGap(18, 18, 18)
-                        .addComponent(jRadioButton_femenino))
-                    .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                        .addComponent(datosPaciente_CargarOrden, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton_ListadoPaciente_CargarOrden1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_ListadoPaciente_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addComponent(datosAnalisis_CargarOrden5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_buscadorAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox_buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1CargarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton_Analisis_CargarOrden1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CargarOrdenLayout.createSequentialGroup()
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datosAnalisis_CargarOrden1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane4))))
-                .addContainerGap())
-        );
-        jPanel_CargarOrdenLayout.setVerticalGroup(
-            jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(fecha_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jDateChooserfechaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(Medico_cargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                                .addGap(2, 2, 2)
-                                .addComponent(jTextField_Medico_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(datosPaciente_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_ListadoPaciente_CargarOrden1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_ListadoPaciente_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField_Nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField_Apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_dni, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_Edad, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(fecha_CargarOrden1, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                            .addComponent(jDateChooser_fechaNacimiento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(fecha_CargarOrden2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton_masculino)
-                            .addComponent(jRadioButton_femenino))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton_ObraSocial_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox_ObraSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel_CargarOrdenLayout.createSequentialGroup()
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField_buscadorAnalisis, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox_buscador, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(datosAnalisis_CargarOrden5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1CargarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton_Analisis_CargarOrden1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(datosAnalisis_CargarOrden1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel_CargarOrdenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_CargarOrdenLayout.createSequentialGroup()
-                                .addComponent(jScrollPane4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton_CargarOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7)))
-                .addGap(11, 11, 11))
-        );
+        jPanel_CargarOrden.add(jButton_Analisis_CargarOrden1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 20, 98, 37));
 
         jTabbedPane_menuPestañas.addTab("Cargar Orden", jPanel_CargarOrden);
 
@@ -1526,7 +1444,7 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jButton2CargarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1245, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane6)
                     .addGroup(jPanel2_cargarResultadosLayout.createSequentialGroup()
                         .addComponent(datosAnalisis_CargarOrden2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1536,7 +1454,7 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2_cargarResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(datosAnalisis_CargarOrden3, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel2_cargarResultadosLayout.setVerticalGroup(
             jPanel2_cargarResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1549,16 +1467,16 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2_cargarResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2_cargarResultadosLayout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2_cargarResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(datosAnalisis_CargarOrden4, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2CargarResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
-                    .addComponent(jScrollPane5))
-                .addGap(113, 113, 113))
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE))
+                .addGap(134, 134, 134))
         );
 
         jTextFieldResultadosBuscarOrden.getAccessibleContext().setAccessibleName("");
@@ -1609,24 +1527,19 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(datosAnalisis_CargarOrden6, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1173, Short.MAX_VALUE))
-            .addGroup(jPanel2ListarOrdenesPendientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.DEFAULT_SIZE, 1548, Short.MAX_VALUE)
-                    .addContainerGap()))
+                .addContainerGap(802, Short.MAX_VALUE))
+            .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 1120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2ListarOrdenesPendientesLayout.setVerticalGroup(
             jPanel2ListarOrdenesPendientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(datosAnalisis_CargarOrden6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(663, Short.MAX_VALUE))
-            .addGroup(jPanel2ListarOrdenesPendientesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2ListarOrdenesPendientesLayout.createSequentialGroup()
-                    .addGap(60, 60, 60)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(51, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(144, Short.MAX_VALUE))
         );
 
         jTabbedPane_menuPestañas.addTab("Listar Ordenes Pendientes", jPanel2ListarOrdenesPendientes);
@@ -1696,7 +1609,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3ImprimirResultadosLayout.createSequentialGroup()
                                 .addComponent(datosAnalisis_CargarOrden7, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 753, Short.MAX_VALUE))
+                                .addGap(0, 390, Short.MAX_VALUE))
                             .addComponent(jScrollPane10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1716,7 +1629,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(datosAnalisis_CargarOrden8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3ImprimirResultadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 486, Short.MAX_VALUE)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
                     .addComponent(jScrollPane11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton_imprimirResultado, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1773,7 +1686,7 @@ public class Principal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_stockLayout.createSequentialGroup()
-                        .addComponent(jLabel_nombreStock, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                        .addComponent(jLabel_nombreStock, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
                         .addGap(268, 268, 268))
                     .addGroup(jPanel_stockLayout.createSequentialGroup()
                         .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1816,12 +1729,29 @@ public class Principal extends javax.swing.JFrame {
                         .addGroup(jPanel_stockLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton_ActualzarStock, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
         jTabbedPane_menuPestañas.addTab("Stock", jPanel_stock);
 
-        getContentPane().add(jTabbedPane_menuPestañas, java.awt.BorderLayout.CENTER);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTabbedPane_menuPestañas, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane_menuPestañas)
+                .addContainerGap())
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -2815,6 +2745,22 @@ public class Principal extends javax.swing.JFrame {
     private void jComboBox_NombreBioquimicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_NombreBioquimicosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_NombreBioquimicosActionPerformed
+
+    private void jTextField_NombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_NombreActionPerformed
+
+    private void jTextField_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_telefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_telefonoActionPerformed
+
+    private void jTextField_EdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_EdadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_EdadActionPerformed
+
+    private void jRadioButton_femeninoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton_femeninoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton_femeninoActionPerformed
     public String tomarTexto(String texto) {
         return texto;
     }
